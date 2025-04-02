@@ -3,104 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ** ACTION REQUIRED: Update Title ** -->
-    <title>Undangan Pernikahan Ardi & Diah</title>
-
-    <!-- Preconnect for Fonts & Performance -->
+    <title>Undangan Pernikahan Ardiansyah & Duhriyah</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS Variables --- */
         :root {
             --font-primary: 'Lato', sans-serif;
             --font-headings: 'Playfair Display', serif;
             --font-script: 'Great Vibes', cursive;
-
-            --color-background: #fefbf9; /* Slightly warmer cream */
-            --color-text-body: #5a4a42; /* Dark brown for good contrast */
-            --color-text-headings: #7a5d50; /* Slightly richer brown */
-            --color-text-subtle: #88756a;
-            --color-accent-primary: #b58e7e; /* Muted rose gold / taupe */
-            --color-accent-secondary: #a07d6e; /* Slightly darker accent */
-            --color-accent-soft: #d9c5bb;   /* Softer accent for borders/bg */
+            --color-background: #f9f5f2;
+            --color-wash-1: rgba(221, 201, 191, 0.15);
+            --color-wash-2: rgba(209, 188, 161, 0.12);
+            --color-text-body: #70665f;
+            --color-text-headings: #5c524b;
+            --color-text-subtle: #9a8f88;
+            --color-accent-primary: #c5a88d;
+            --color-accent-secondary: #a98c70;
+            --color-divider: rgba(197, 168, 141, 0.25);
             --color-white: #ffffff;
-            --color-shadow: rgba(90, 74, 66, 0.1); /* Shadow based on text color */
-
-            /* ADJUSTED: Make pattern slightly more visible */
-            --color-pattern-line: rgba(181, 142, 126, 0.18); /* Was 0.1 */
-
-            --shadow-soft: 0 4px 12px var(--color-shadow);
-            --shadow-medium: 0 6px 18px var(--color-shadow);
+            --color-shadow: rgba(92, 82, 75, 0.12);
+            --shadow-soft: 0 4px 15px var(--color-shadow);
+            --shadow-medium: 0 8px 25px var(--color-shadow);
         }
 
-        /* --- Basic Reset & Setup --- */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 100%;
-            -webkit-tap-highlight-color: transparent;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 100%; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: var(--font-primary);
+            font-weight: 300;
             line-height: 1.7;
             color: var(--color-text-body);
-
-            /* === Programmatic Background Pattern === */
             background-color: var(--color-background);
-            background-image:
-                repeating-linear-gradient(
-                    45deg,
-                    var(--color-pattern-line) 0,
-                    var(--color-pattern-line) 1px,
-                    transparent 1px,
-                    transparent 25px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    var(--color-pattern-line) 0,
-                    var(--color-pattern-line) 1px,
-                    transparent 1px,
-                    transparent 25px
-                );
-            background-size: 25px 25px;
-
-            /* --- Other body styles --- */
+            position: relative;
             overflow-x: hidden;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='5' viewBox='0 0 5 5'%3E%3Cpath fill='%23a98c70' fill-opacity='0.04' d='M1 4h1v1H1V4zm2-2h1v1H3V2zm2 2h1v1H5V4zM0 1h1v1H0V1z'%3E%3C/path%3E%3C/svg%3E");
         }
 
-        /* --- Animation Setup --- */
-        .js-enabled .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 0.9s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
-            will-change: opacity, transform;
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+            mix-blend-mode: multiply;
         }
-        .js-enabled .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+
+        body::before {
+            background: linear-gradient(
+                -30deg,
+                transparent 40%,
+                var(--color-wash-1) 65%,
+                transparent 85%
+            );
+             transform: translateX(-20%);
         }
-        .js-enabled .animate-on-scroll:nth-of-type(2) { transition-delay: 0.1s; }
-        .js-enabled .animate-on-scroll:nth-of-type(3) { transition-delay: 0.2s; }
-        .js-enabled .animate-on-scroll:nth-of-type(4) { transition-delay: 0.3s; }
-        .js-enabled section .animate-on-scroll:nth-of-type(1) { transition-delay: 0s; }
-        .js-enabled section .animate-on-scroll:nth-of-type(2) { transition-delay: 0.15s; }
-        .js-enabled section .animate-on-scroll:nth-of-type(3) { transition-delay: 0.3s; }
-        .js-enabled section .animate-on-scroll:nth-of-type(4) { transition-delay: 0.45s; }
 
+        body::after {
+            background: linear-gradient(
+                45deg,
+                transparent 35%,
+                var(--color-wash-2) 60%,
+                transparent 80%
+            );
+             transform: translateX(20%);
+             opacity: 0.7;
+        }
 
-        /* --- Typography --- */
+        .js-enabled .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1s cubic-bezier(0.165, 0.84, 0.44, 1); will-change: opacity, transform; }
+        .js-enabled .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .js-enabled .animate-on-scroll:nth-of-type(2) { transition-delay: 0.15s; }
+        .js-enabled .animate-on-scroll:nth-of-type(3) { transition-delay: 0.3s; }
+        .js-enabled section .animate-on-scroll:nth-of-type(1) { transition-delay: 0.1s; }
+        .js-enabled section .animate-on-scroll:nth-of-type(2) { transition-delay: 0.25s; }
+        .js-enabled section .animate-on-scroll:nth-of-type(3) { transition-delay: 0.4s; }
+
         h1, h2, h3 {
             font-family: var(--font-headings);
             font-weight: 400;
@@ -108,136 +94,155 @@
             margin-bottom: 1rem;
             line-height: 1.3;
         }
-        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 0.5rem; }
-        h2 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin-top: 3rem; text-align: center; color: var(--color-accent-secondary); font-weight: 500; }
-        h3 { font-size: clamp(1.2rem, 4vw, 1.6rem); margin-top: 2.5rem; font-weight: 500; color: var(--color-text-headings); }
+        h1.script-names {
+            font-family: var(--font-script);
+            font-weight: 400;
+            font-size: clamp(4rem, 14vw, 7.5rem);
+            color: var(--color-accent-primary);
+            line-height: 0.95;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+        }
+        h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+            color: var(--color-text-headings);
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin-top: 3rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--color-text-headings);
+            text-align: center;
+        }
 
         p {
-            margin-bottom: 1.2rem;
-            font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+            margin-bottom: 1.5rem;
+            font-size: clamp(0.95rem, 2.2vw, 1rem);
             font-weight: 300;
             color: var(--color-text-body);
+            max-width: 60ch;
+            margin-left: auto;
+            margin-right: auto;
         }
         p strong {
             font-weight: 700;
-             color: var(--color-text-headings);
+            color: var(--color-text-headings);
         }
-
         a {
             color: var(--color-accent-primary);
             text-decoration: none;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-             text-shadow: 0 0 0 rgba(181, 142, 126, 0);
+            font-weight: 400;
+            transition: color 0.3s ease;
         }
         a:hover, a:focus {
             color: var(--color-accent-secondary);
-            text-decoration: underline;
-            text-decoration-color: var(--color-accent-soft);
-            text-underline-offset: 3px;
-            text-shadow: 0 0 8px rgba(181, 142, 126, 0.2);
              outline: none;
+             text-decoration: underline;
+             text-decoration-thickness: 1px;
+             text-underline-offset: 3px;
         }
 
-        /* --- Layout & Containers --- */
         .container {
-            max-width: 750px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem;
+            max-width: 680px;
+            margin: 0 auto 3.5rem auto;
+            padding: 3.5rem 2.5rem;
             overflow: hidden;
-            /* ADJUSTED: Make container overlay slightly more transparent */
-            background-color: rgba(254, 251, 249, 0.5); /* Was 0.6 */
-            box-shadow: 0 0 30px rgba(181, 142, 126, 0.05);
-            border-radius: 4px;
-            margin-bottom: 2rem;
+            background-color: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-soft);
+            border-radius: 6px;
+            position: relative;
+            z-index: 1;
         }
          header.hero .container {
             background-color: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             box-shadow: none;
             border-radius: 0;
             margin-bottom: 0;
-            padding: 0 1.5rem;
+            padding: 0 1rem;
          }
          footer .container {
              margin-bottom: 0;
+             background-color: transparent;
+             backdrop-filter: none;
+             -webkit-backdrop-filter: none;
+             box-shadow: none;
+             border-top: 1px solid var(--color-divider);
+             border-radius: 0;
+             padding-top: 3rem;
+             padding-bottom: 3rem;
          }
 
-
         header.hero {
-            min-height: 95vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem;
             position: relative;
-             margin-bottom: 2rem;
-        }
-        .hero .names {
-            font-family: var(--font-script);
-            color: var(--color-accent-secondary);
-            margin-bottom: 0.75rem;
-            font-size: clamp(3.5rem, 12vw, 6rem);
-            line-height: 1;
+            margin-bottom: 4rem;
         }
         .hero .sub-title {
-            font-size: clamp(1rem, 3vw, 1.25rem);
+            font-family: var(--font-headings);
+            font-style: italic;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
             color: var(--color-text-subtle);
-            font-weight: 300;
-            margin-top: 0.5rem;
+            font-weight: 400;
             max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 0.5rem auto;
+            letter-spacing: 0.5px;
         }
         .hero .date-highlight {
             display: block;
-            margin-top: 1rem;
+            margin-top: 2rem;
             font-family: var(--font-headings);
-            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
-            color: var(--color-accent-primary);
+            font-weight: 400;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: var(--color-text-subtle);
+            letter-spacing: 1px;
         }
 
-        /* --- Sections --- */
-        section {
-            padding: 0;
-            text-align: center;
-            position: relative;
-        }
+        section { padding: 0; text-align: center; position: relative; }
 
-        /* --- Decorative Elements --- */
-        .divider {
-            width: 120px;
-            height: auto;
-            margin: 2rem auto;
-            color: var(--color-accent-soft);
+        hr.section-divider {
+            width: 80px;
+            height: 1px;
+            background-color: var(--color-divider);
+            margin: 0 auto 2.5rem auto;
+            border: none;
         }
         .heart-icon {
             display: inline-block;
-            color: #d9a99a;
-            font-size: 1.3rem;
-            margin: 0.5rem 0.5rem 0;
+            color: var(--color-accent-primary);
+            font-size: 1.1rem;
+            margin: 2rem 0 0 0;
             opacity: 0.7;
         }
-        .js-enabled .heart-icon {
-             animation: pulse 2.5s infinite ease-in-out alternate;
-        }
-        @keyframes pulse {
-            from { transform: scale(1); opacity: 0.6; }
-            to { transform: scale(1.1); opacity: 0.8; }
-        }
 
-        /* --- Button Styling --- */
         .cta-button {
             display: inline-block;
             background-color: var(--color-accent-primary);
             color: var(--color-white);
-            padding: 14px 30px;
-            border-radius: 30px;
+            padding: 12px 35px;
+            border-radius: 50px;
             text-decoration: none;
             font-family: var(--font-primary);
-            font-weight: 700;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-            margin-top: 2rem;
+            font-weight: 400;
+            font-size: clamp(0.9rem, 2.2vw, 1rem);
+            letter-spacing: 0.5px;
+            margin-top: 2.5rem;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: var(--shadow-soft);
             cursor: pointer;
@@ -247,260 +252,144 @@
             background-color: var(--color-accent-secondary);
             color: var(--color-white);
             text-decoration: none;
-            transform: translateY(-3px);
+            transform: translateY(-2px) scale(1.02);
             box-shadow: var(--shadow-medium);
             outline: none;
         }
-         .cta-button:active {
-             transform: translateY(-1px);
-             box-shadow: var(--shadow-soft);
-         }
+         .cta-button:active { transform: translateY(0px) scale(1); box-shadow: var(--shadow-soft); }
 
-        /* --- Floating Music Player Styling --- */
-        #floating-music-player {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 1000;
-            background-color: rgba(160, 125, 110, 0.85);
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            box-shadow: var(--shadow-medium);
-            cursor: grab;
-            transition: box-shadow 0.3s ease, transform 0.2s ease-out, background-color 0.3s ease;
-            transform: translate3d(0, 0, 0);
-            will-change: transform, box-shadow;
-            touch-action: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #floating-music-player.dragging {
-             cursor: grabbing;
-             box-shadow: 0 10px 25px rgba(90, 74, 66, 0.25);
-             background-color: rgba(160, 125, 110, 0.95);
-        }
-        #floating-play-pause {
-            background: none;
-            border: none;
-            color: var(--color-white);
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            padding: 0;
-            line-height: 1;
-            transition: transform 0.2s ease, opacity 0.3s ease;
-            pointer-events: auto;
-            user-select: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0.85;
-        }
-         #floating-play-pause:hover,
-         #floating-play-pause:focus {
-             transform: scale(1.15);
-             opacity: 1;
-             outline: none;
-         }
-         #floating-play-pause:active {
-              transform: scale(0.95);
-              opacity: 0.9;
-         }
-         #floating-play-pause svg {
-             width: 100%;
-             height: 100%;
-             fill: currentColor;
-             display: block;
-         }
-         /* Icons State Management */
-         #floating-music-player .icon-play,
-         #floating-music-player .icon-pause,
-         #floating-music-player .icon-error { display: none; }
-         #floating-music-player.paused .icon-play { display: block; }
-         #floating-music-player.playing .icon-pause { display: block; }
-         #floating-music-player.error .icon-error { display: block; }
-         #floating-music-player:not(.playing):not(.paused):not(.error) .icon-play { display: block; }
+        #floating-music-player { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background-color: rgba(92, 82, 75, 0.88); border-radius: 50%; width: 50px; height: 50px; box-shadow: var(--shadow-medium); cursor: grab; transition: box-shadow 0.3s ease, transform 0.2s ease-out, background-color 0.3s ease; transform: translate3d(0, 0, 0); will-change: transform, box-shadow; touch-action: none; display: flex; justify-content: center; align-items: center; }
+        #floating-music-player.dragging { cursor: grabbing; box-shadow: 0 8px 20px rgba(92, 82, 75, 0.35); background-color: rgba(92, 82, 75, 0.95); }
+        #floating-play-pause { background: none; border: none; color: var(--color-white); cursor: pointer; width: 20px; height: 20px; padding: 0; line-height: 1; transition: transform 0.2s ease, opacity 0.3s ease; pointer-events: auto; user-select: none; display: flex; justify-content: center; align-items: center; opacity: 0.8; }
+        #floating-play-pause:hover, #floating-play-pause:focus { transform: scale(1.15); opacity: 1; outline: none; }
+        #floating-play-pause:active { transform: scale(0.95); opacity: 0.9; }
+        #floating-play-pause svg { width: 100%; height: 100%; fill: currentColor; display: block; }
+        #floating-music-player .icon-play, #floating-music-player .icon-pause, #floating-music-player .icon-error { display: none; }
+        #floating-music-player.paused .icon-play { display: block; }
+        #floating-music-player.playing .icon-pause { display: block; }
+        #floating-music-player.error .icon-error { display: block; }
+        #floating-music-player:not(.playing):not(.paused):not(.error) .icon-play { display: block; }
+        #floating-music-player.playing { animation: pulsePlayer 1.8s infinite cubic-bezier(0.66, 0, 0, 1); }
+        @keyframes pulsePlayer { 0% { box-shadow: 0 0 0 0 rgba(197, 168, 141, 0.4), var(--shadow-medium); } 70% { box-shadow: 0 0 0 10px rgba(197, 168, 141, 0), var(--shadow-medium); } 100% { box-shadow: 0 0 0 0 rgba(197, 168, 141, 0), var(--shadow-medium); } }
 
+        footer { padding: 0; text-align: center; margin-top: 4rem; }
+        footer p { margin-bottom: 0.5rem; line-height: 1.5; font-weight: 400; color: var(--color-text-subtle); max-width: none; }
+        footer .crafted { font-size: 0.85em; margin-top: 1.5rem; color: var(--color-text-subtle); opacity: 0.7; font-style: italic; }
+        footer .heart-icon { margin-top: 1rem; }
 
-        /* Music Player Pulse Animation */
-        #floating-music-player.playing {
-             animation: pulsePlayer 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
-        }
-        @keyframes pulsePlayer {
-            0% { box-shadow: 0 0 0 0 rgba(181, 142, 126, 0.5), var(--shadow-medium); }
-            70% { box-shadow: 0 0 0 12px rgba(181, 142, 126, 0), var(--shadow-medium); }
-            100% { box-shadow: 0 0 0 0 rgba(181, 142, 126, 0), var(--shadow-medium); }
-        }
-
-        /* --- Footer --- */
-        footer {
-            padding: 0;
-            text-align: center;
-            margin-top: 3rem;
-        }
-         footer .container {
-             padding-top: 3rem;
-             padding-bottom: 3rem;
-             border-top: 1px solid var(--color-accent-soft);
-             background-color: transparent; /* Keep footer clear */
-             box-shadow: none;
-             border-radius: 0;
-         }
-        footer p {
-            margin-bottom: 0.5rem;
-            line-height: 1.5;
-            font-weight: 400;
-            color: var(--color-text-subtle);
-        }
-        footer .heart-icon {
-            font-size: 1rem;
-             animation: none;
-             opacity: 0.5;
-             margin-top: 0.5rem;
-             margin-bottom: 0.5rem;
-             color: var(--color-accent-soft);
-        }
-        footer .crafted {
-            font-size: 0.85em;
-            margin-top: 1rem;
-            color: var(--color-text-subtle);
-            opacity: 0.7;
-        }
-
-
-        /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
-            .container { padding: 2rem 1rem; margin-bottom: 1.5rem; }
-            header.hero { min-height: 85vh; margin-bottom: 1.5rem; }
-            h1 { font-size: clamp(2.2rem, 7vw, 3.5rem); }
-            h2 { font-size: clamp(1.6rem, 4.5vw, 2rem); }
-            h3 { font-size: clamp(1.1rem, 3.5vw, 1.4rem); }
-            #floating-music-player { bottom: 20px; right: 20px; width: 50px; height: 50px; }
-            #floating-play-pause { width: 20px; height: 20px; }
+             .container { padding: 3rem 2rem; margin-bottom: 3rem; }
+             header.hero { min-height: 85vh; margin-bottom: 3rem; padding: 3rem 1rem; }
+             h1.script-names { font-size: clamp(3.5rem, 12vw, 6rem); }
+             h2 { font-size: clamp(1.6rem, 4.5vw, 2.2rem); margin-top: 3rem; }
+             h3 { font-size: clamp(1.1rem, 3.5vw, 1.4rem); margin-top: 2.5rem; }
+             #floating-music-player { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+             #floating-play-pause { width: 18px; height: 18px; }
         }
-
         @media (max-width: 480px) {
-            body { line-height: 1.6; }
-            .container { padding: 1.5rem 1rem; margin-bottom: 1rem;}
-            header.hero { min-height: 80vh; padding: 2rem 0.5rem; margin-bottom: 1rem; }
-            header.hero .container { padding: 0 1rem; }
-             .hero .names { font-size: clamp(3rem, 10vw, 4.5rem); }
-            p { font-size: clamp(0.9rem, 2.8vw, 1rem); }
-            .cta-button { padding: 12px 25px; margin-top: 1.5rem; }
-            #floating-music-player { bottom: 15px; right: 15px; width: 45px; height: 45px; }
-            #floating-play-pause { width: 18px; height: 18px; }
-            footer { margin-top: 2rem;}
-            footer .container { padding-top: 2rem; padding-bottom: 2rem;}
+             body { line-height: 1.65; }
+             .container { padding: 2.5rem 1rem; margin-bottom: 2.5rem; }
+             header.hero { min-height: 80vh; padding: 2rem 0.5rem; margin-bottom: 2.5rem; }
+             header.hero .container { padding: 0 0.5rem; }
+             h1.script-names { font-size: clamp(3rem, 11vw, 5rem); }
+             p { font-size: clamp(0.9rem, 2.5vw, 0.95rem); }
+             .cta-button { padding: 10px 30px; margin-top: 2rem; }
+             #floating-music-player { bottom: 15px; right: 15px; width: 40px; height: 40px; }
+             #floating-play-pause { width: 16px; height: 16px; }
+             footer { margin-top: 3rem;}
+             footer .container { padding-top: 2.5rem; padding-bottom: 2.5rem;}
         }
-
     </style>
-    <!-- Minimal JS to add js-enabled class EARLY -->
     <script>document.documentElement.classList.add('js-enabled');</script>
 </head>
 <body>
-
-    <!-- Hero Section -->
     <header class="hero">
         <div class="container">
-            <p class="sub-title animate-on-scroll">Dengan rahmat Tuhan Yang Maha Esa, kami mengundang Anda untuk merayakan:</p>
-            <h1 class="names animate-on-scroll">Ardi & Diah</h1>
-            <p class="sub-title animate-on-scroll">pada hari pernikahan kami</p>
-            <p class="date-highlight animate-on-scroll">Sabtu, 6 September 2035</p>
-             <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
+            <p class="sub-title animate-on-scroll">Atas berkat dan rahmat Tuhan Yang Maha Esa</p>
+            <h1 class="script-names animate-on-scroll">Ardi & Duh</h1>
+            <p class="sub-title animate-on-scroll">dengan penuh hormat mengundang Bapak/Ibu/Saudara/i</p>
+            <p class="date-highlight animate-on-scroll">6 SEPTEMBER 2035</p>
         </div>
     </header>
 
-    <!-- Details Section -->
     <section id="details">
         <div class="container">
-            <h2 class="animate-on-scroll">Perayaan Cinta</h2>
-            <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
-            <p class="animate-on-scroll">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu pada hari istimewa kami.</p>
-            <h3 class="animate-on-scroll">Waktu Acara</h3>
+            <h2 class="animate-on-scroll">Acara Pernikahan</h2>
+            <hr class="section-divider animate-on-scroll">
+            <p class="animate-on-scroll">Kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami:</p>
+            
+            <h3 class="animate-on-scroll">Waktu</h3>
             <p class="animate-on-scroll">
                 <strong>Sabtu, 6 September 2035</strong><br>
-                Akad Nikah: Pukul 09:00 WIB <br>
-                Resepsi: Pukul 11:00 - 14:00 WIB
+                Akad Nikah Pukul 09.00 WIB<br>
+                Resepsi Pukul 11.00 - 14.00 WIB
             </p>
-            <h3 class="animate-on-scroll">Pakaian</h3>
-            <p class="animate-on-scroll">Batik / Pakaian Formal Sopan</p>
+            
+            <h3 class="animate-on-scroll">Tata Busana</h3>
+            <p class="animate-on-scroll">Batik Formal atau Pakaian Formal</p>
         </div>
     </section>
 
-    <!-- Venue Section -->
     <section id="venue">
         <div class="container">
             <h2 class="animate-on-scroll">Lokasi Acara</h2>
-            <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
-            <h3 class="animate-on-scroll">Tokopedia Tower (Lantai 17)</h3>
-            <p class="animate-on-scroll">
-                Ciputra World 2, Jl. Prof. DR. Satrio No.Kav. 11, RT.3/RW.3<br>
-                Karet Semanggi, Kota Jakarta Selatan, DKI Jakarta, 12950
+            <hr class="section-divider animate-on-scroll">
+            <h3 class="animate-on-scroll">Tokopedia Tower</h3>
+             <p class="animate-on-scroll">Lantai 17, Ciputra World 2<br>
+                Jl. Prof. DR. Satrio Kav. 11, Karet Semanggi<br>
+                Jakarta Selatan, 12950
             </p>
             <p class="animate-on-scroll">
                 <a href="https://www.google.com/maps/search/?api=1&query=Tokopedia+Tower+Jakarta" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
                     Lihat Peta Lokasi
                 </a>
             </p>
-             <p class="animate-on-scroll">Akad nikah dan resepsi akan dilaksanakan di lokasi yang sama.</p>
         </div>
     </section>
 
-    <!-- RSVP Section -->
     <section id="rsvp">
         <div class="container">
             <h2 class="animate-on-scroll">Konfirmasi Kehadiran</h2>
-             <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
+             <hr class="section-divider animate-on-scroll">
             <p class="animate-on-scroll">
-                Mohon konfirmasi kehadiran Anda sebelum tanggal
+                Mohon konfirmasi kehadiran Anda sebelum tanggal<br>
                 <strong>20 Agustus 2035</strong>
-                agar kami dapat mempersiapkan segalanya dengan baik.
-            </p>
-            <p class="animate-on-scroll">
-                Kehadiran dan doa restu Anda adalah anugerah terindah bagi kami.
             </p>
             <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button animate-on-scroll">
-                Konfirmasi Kehadiran Disini
+                Konfirmasi Kehadiran
             </a>
             <p class="animate-on-scroll" style="margin-top: 1.5rem; font-size: 0.9em;">
-                Atau hubungi kami melalui WhatsApp:<br>
-                <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">0812-3456-7890 (Ardi)</a><br>
-                <a href="https://wa.me/6287798765432" target="_blank" rel="noopener noreferrer">0877-9876-5432 (Diah)</a>
+                Untuk informasi lebih lanjut:<br>
+                <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">Ardiansyah</a> |
+                <a href="https://wa.me/6287798765432" target="_blank" rel="noopener noreferrer">Duhriyah</a>
             </p>
         </div>
     </section>
 
-     <!-- Optional: Gift Section -->
     <section id="gifts">
         <div class="container">
              <h2 class="animate-on-scroll">Ungkapan Kasih</h2>
-             <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
+             <hr class="section-divider animate-on-scroll">
              <p class="animate-on-scroll">
-                Doa restu Anda merupakan karunia yang tak ternilai bagi kami.
+                Kehadiran Anda sudah merupakan kebahagiaan bagi kami. Jika ingin memberikan tanda kasih:
              </p>
              <p class="animate-on-scroll">
-                Namun jika memberi adalah ungkapan tanda kasih, Anda dapat mengirimkannya secara cashless melalui:
-                <br>
-                 <a href="#" target="_blank" rel="noopener noreferrer">Bank Central Asia (BCA) - 1234567890</a> a/n Ardiansyah <br>
-                 <a href="#" target="_blank" rel="noopener noreferrer">GoPay / OVO - 089988776655</a> a/n Diah
-             </p>
-             <p class="animate-on-scroll" style="margin-top: 1.5rem; font-size: 0.9em; color: var(--color-text-subtle);">
-                Terima kasih atas perhatian dan kasih sayang Anda.
+                 Transfer Bank:<br>
+                 <a href="#" target="_blank" rel="noopener noreferrer">BCA: 1234567890 (Ardiansyah)</a><br>
+                 E-Wallet:<br>
+                 <a href="#" target="_blank" rel="noopener noreferrer">GoPay/OVO: 089988776655 (Duhriyah)</a>
              </p>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>Hormat kami yang berbahagia,<br> Ardiansyah & Diah</p>
-            <span class="heart-icon">❤</span>
-            <p class="crafted">Invitation crafted with love.</p>
+            <p>Terima kasih atas doa dan kebahagiaan yang Bapak/Ibu berikan</p>
+            <span class="heart-icon">♡</span>
+            <p class="crafted">Ardiansyah & Duhriyah</p>
         </div>
     </footer>
 
-    <!-- Floating Music Player -->
     <div id="floating-music-player" class="paused" aria-label="Kontrol Musik">
         <button id="floating-play-pause" aria-label="Putar Musik" disabled>
              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -509,19 +398,15 @@
         </button>
     </div>
 
-    <!-- HTML5 Audio Player (Hidden) -->
     <audio id="background-music" loop preload="metadata">
-        <!-- ** ACTION REQUIRED: Ensure music.mp3 exists in the same folder ** -->
         <source src="music.mp3" type="audio/mpeg">
         Browser Anda tidak mendukung elemen audio.
     </audio>
 
-    <!-- JavaScript (Includes fixes for player icon state) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             console.log("DOM Loaded. Initializing scripts.");
 
-            // --- Scroll Animations ---
             if ('IntersectionObserver' in window && document.documentElement.classList.contains('js-enabled')) {
                 const animatedElements = document.querySelectorAll('.animate-on-scroll');
                 if (animatedElements.length > 0) {
@@ -529,7 +414,6 @@
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
                                 entry.target.classList.add('is-visible');
-                                // observer.unobserve(entry.target);
                             }
                         });
                     }, { threshold: 0.1 });
@@ -546,7 +430,6 @@
                  });
             }
 
-            // --- HTML5 Audio Player Logic ---
             const audioPlayer = document.getElementById('background-music');
             const floatingPlayerElement = document.getElementById('floating-music-player');
             const floatingPlayPauseButton = document.getElementById('floating-play-pause');
@@ -571,37 +454,32 @@
                         console.log("Player state updated to: Playing");
                     }
                     if (!isError) {
-                         // Only enable if audio is ready or potentially ready
-                         // Checking readyState >= 1 (HAVE_METADATA) is a reasonable check
                          floatingPlayPauseButton.disabled = !(audioPlayer.readyState >= 1);
-                         // If state is paused/playing but button got disabled, re-enable
-                         if (!floatingPlayPauseButton.disabled && (floatingPlayerElement.classList.contains('paused') || floatingPlayerElement.classList.contains('playing'))) {
-                              // It seems ready, ensure enabled
-                         } else if (audioPlayer.readyState < 1) {
-                             floatingPlayPauseButton.disabled = true; // Ensure disabled if not ready
+                         if (audioPlayer.readyState < 1) {
+                             floatingPlayPauseButton.disabled = true;
                          }
                     }
                 };
 
                 audioPlayer.addEventListener('canplay', () => {
                      console.log("Audio can play. Enabling button.");
-                     updatePlayerState(); // Update state and enable button
+                     updatePlayerState();
                  }, { once: true });
 
                  const enableButtonFallback = setTimeout(() => {
                      if (floatingPlayPauseButton.disabled && !floatingPlayerElement.classList.contains('error')) {
                         console.log("Timeout: Enabling button as fallback.");
                          if (!floatingPlayerElement.classList.contains('playing') && !floatingPlayerElement.classList.contains('paused')) {
-                            floatingPlayerElement.classList.add('paused'); // Default visual state
+                            floatingPlayerElement.classList.add('paused');
                             floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
                          }
                          floatingPlayPauseButton.disabled = false;
                      }
-                 }, 3000); // Increased timeout slightly
+                 }, 3000);
 
                 floatingPlayPauseButton.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    floatingPlayerElement.classList.remove('error'); // Attempt to clear error on click
+                    floatingPlayerElement.classList.remove('error');
 
                     if (audioPlayer.paused || audioPlayer.ended) {
                         const playPromise = audioPlayer.play();
@@ -632,8 +510,8 @@
                     updatePlayerState();
                 };
 
-                audioPlayer.addEventListener('loadstart', () => { floatingPlayPauseButton.disabled = true; console.log("Audio Event: loadstart"); }); // Disable on load start
-                audioPlayer.addEventListener('loadedmetadata', () => { console.log("Audio Event: loadedmetadata"); updatePlayerState(); }); // Update state, might enable button
+                audioPlayer.addEventListener('loadstart', () => { floatingPlayPauseButton.disabled = true; console.log("Audio Event: loadstart"); });
+                audioPlayer.addEventListener('loadedmetadata', () => { console.log("Audio Event: loadedmetadata"); updatePlayerState(); });
                 audioPlayer.addEventListener('play', () => handleAudioEvent('play'));
                 audioPlayer.addEventListener('playing', () => handleAudioEvent('playing'));
                 audioPlayer.addEventListener('pause', () => handleAudioEvent('pause'));
@@ -645,16 +523,13 @@
                     updatePlayerState(true);
                 });
 
-                // Initial sync in case state loaded quickly
                  if (audioPlayer.readyState >= 1 && !floatingPlayerElement.classList.contains('error')) {
                      updatePlayerState();
                  } else {
-                     // Ensure it's visually paused and disabled if not ready
                      floatingPlayerElement.classList.remove('playing','error');
                      floatingPlayerElement.classList.add('paused');
                      floatingPlayPauseButton.disabled = true;
                  }
-
 
             } else {
                 console.error("Required audio player elements not found! Check IDs.");
@@ -662,33 +537,26 @@
                 if (floatingPlayerElement) floatingPlayerElement.style.display = 'none';
             }
 
-
-            // --- Draggable Music Player Logic ---
              if (floatingPlayerElement) {
                 let isDragging = false;
-                let startX, startY, initialX = 0, initialY = 0; // Initialize position
+                let startX, startY, initialX = 0, initialY = 0;
 
-                 // Get initial position from CSS (might be 0,0 if not previously moved)
                  const style = window.getComputedStyle(floatingPlayerElement);
                  const matrix = new DOMMatrixReadOnly(style.transform);
                  initialX = matrix.m41;
                  initialY = matrix.m42;
-                 console.log("Initial Player Position Read:", initialX, initialY);
-
 
                 function dragStart(e) {
                     if (e.target === floatingPlayPauseButton || (floatingPlayPauseButton && floatingPlayPauseButton.contains(e.target)) || (floatingPlayPauseButton && floatingPlayPauseButton.disabled)) {
                          return;
                     }
-
                     isDragging = true;
                     floatingPlayerElement.classList.add('dragging');
                     floatingPlayerElement.style.transition = 'none';
 
-                    // Read CURRENT transform just before drag starts
                     const currentStyle = window.getComputedStyle(floatingPlayerElement);
                     const currentMatrix = new DOMMatrixReadOnly(currentStyle.transform);
-                    initialX = currentMatrix.m41; // Re-sync initial pos for this drag
+                    initialX = currentMatrix.m41;
                     initialY = currentMatrix.m42;
 
                     if (e.type === 'mousedown') {
@@ -706,7 +574,6 @@
                          floatingPlayerElement.classList.remove('dragging');
                          return;
                     }
-                     console.log("Drag Start - Initial:", initialX, initialY);
                 }
 
                 function dragMove(e) {
@@ -726,16 +593,13 @@
                     let newX = initialX + dx;
                     let newY = initialY + dy;
 
-                    // Constrain based on viewport dimensions and element size
                     const elemWidth = floatingPlayerElement.offsetWidth;
                     const elemHeight = floatingPlayerElement.offsetHeight;
                     const maxX = window.innerWidth - elemWidth;
                     const maxY = window.innerHeight - elemHeight;
 
-                    // Ensure transform values don't push element off-screen
                     newX = Math.max(0, Math.min(newX, maxX));
                     newY = Math.max(0, Math.min(newY, maxY));
-
 
                     floatingPlayerElement.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
                 }
@@ -744,15 +608,12 @@
                     if (!isDragging) return;
                     isDragging = false;
                     floatingPlayerElement.classList.remove('dragging');
-                    floatingPlayerElement.style.transition = ''; // Re-enable transitions AFTER releasing
+                    floatingPlayerElement.style.transition = '';
 
-                     // Read final transform to update initialX/Y for next potential drag
                     const finalStyle = window.getComputedStyle(floatingPlayerElement);
                     const finalMatrix = new DOMMatrixReadOnly(finalStyle.transform);
                     initialX = finalMatrix.m41;
                     initialY = finalMatrix.m42;
-                    console.log("Drag End - Final:", initialX, initialY);
-
 
                     if (e.type === 'mouseup' || e.type === 'mousemove') {
                         document.removeEventListener('mousemove', dragMove);
@@ -770,9 +631,7 @@
             } else {
                  console.error("Draggable player element (#floating-music-player) not found!");
             }
-
-        }); // End DOMContentLoaded listener
+        });
     </script>
-
 </body>
-</html> 
+</html>
