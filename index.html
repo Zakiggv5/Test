@@ -1,10 +1,21 @@
 <!DOCTYPE html>
+<!-- Added lang="id" for Indonesian -->
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <!-- Crucial for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Updated Title -->
+
+    <!-- ** ACTION REQUIRED: Update Title ** -->
     <title>Undangan Pernikahan Ardi & Diah</title>
+
+    <!-- Preconnect for performance (optional but good) -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="preconnect" href="https://s.ytimg.com">
+    <link rel="preconnect" href="https://google.com">
+    <link rel="preconnect" href="https://www.google.com">
+
     <style>
         /* --- Basic Reset & Setup --- */
         *, *::before, *::after {
@@ -15,20 +26,51 @@
 
         html {
             scroll-behavior: smooth;
-            font-size: 16px; /* Base font size */
+            font-size: 100%;
         }
 
         body {
             font-family: 'Georgia', serif;
             line-height: 1.6;
             color: #333;
-            background-color: #fdfbf8; /* Soft cream background */
-            background-image: radial-gradient(circle at top left, rgba(240, 220, 200, 0.1), transparent 40%),
-                              radial-gradient(circle at bottom right, rgba(210, 190, 220, 0.1), transparent 50%);
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            /* Ensure body takes at least full viewport height to prevent drag issues on short pages */
+            background-color: #fdfbf8; /* Soft cream base */
+            background-image:
+                radial-gradient(rgba(190, 170, 180, 0.06) 0.5px, transparent 0.5px),
+                radial-gradient(circle at top left, rgba(240, 220, 200, 0.1), transparent 45%),
+                radial-gradient(circle at bottom right, rgba(210, 190, 220, 0.15), transparent 60%);
+            background-size: 4px 4px, 100% 100%, 100% 100%;
+            background-position: 0 0, 0 0, 0 0;
+            overflow-x: hidden;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
+
+        /* --- Animation Setup --- */
+
+        /* Scroll Animation: Initial State (Hidden) - Only applies if JS adds .js-enabled */
+        .js-enabled .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            /* Defines the transition effect when .is-visible is added */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform; /* Performance hint */
+        }
+        /* Scroll Animation: Visible State (triggered by JS adding this class) */
+        .js-enabled .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Scroll Animation: Stagger delays for elements within the same parent */
+        /* NOTE: Applies to the nth element *of its type* with the class */
+        .js-enabled .animate-on-scroll:nth-of-type(2) { transition-delay: 0.1s; }
+        .js-enabled .animate-on-scroll:nth-of-type(3) { transition-delay: 0.2s; }
+        .js-enabled .animate-on-scroll:nth-of-type(4) { transition-delay: 0.3s; }
+        /* Reset delay counter for elements within each section */
+        .js-enabled section .animate-on-scroll:nth-of-type(1) { transition-delay: 0s; }
+        .js-enabled section .animate-on-scroll:nth-of-type(2) { transition-delay: 0.15s; }
+        .js-enabled section .animate-on-scroll:nth-of-type(3) { transition-delay: 0.3s; }
+        .js-enabled section .animate-on-scroll:nth-of-type(4) { transition-delay: 0.45s; }
 
         /* --- Typography --- */
         h1, h2, h3 {
@@ -37,30 +79,19 @@
             color: #5a4a42; /* Soft brown */
             margin-bottom: 1rem;
         }
-
-        h1 {
-            font-size: 3rem;
-            line-height: 1.2;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            margin-top: 2.5rem;
-            text-align: center;
-            color: #8a6d5e; /* Slightly lighter brown */
-        }
-
+        h1 { font-size: clamp(2.2rem, 6vw, 3rem); line-height: 1.2; }
+        h2 { font-size: clamp(1.8rem, 5vw, 2.2rem); margin-top: 2.5rem; text-align: center; color: #8a6d5e; }
+        h3 { font-size: clamp(1.2rem, 4vw, 1.5rem); margin-top: 2rem; }
         p {
             margin-bottom: 1rem;
             color: #4a4a4a;
+            font-size: clamp(0.95rem, 2.5vw, 1rem);
         }
-
         a {
-            color: #b58e7e; /* Muted rose gold */
+            color: #b58e7e;
             text-decoration: none;
             transition: color 0.3s ease;
         }
-
         a:hover, a:focus {
             color: #8a6d5e;
             text-decoration: underline;
@@ -70,53 +101,41 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem 1.5rem; /* Padding on sides */
-            overflow: hidden; /* Contain floats/margins */
+            padding: 2rem 1.5rem;
+            overflow: hidden;
         }
-
         header.hero {
-            min-height: 90vh; /* Almost full viewport height */
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 2rem;
-            background: linear-gradient(rgba(253, 251, 248, 0.8), rgba(253, 251, 248, 0.95)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10 10 H90 V90 H10Z" fill="rgba(220, 200, 180, 0.05)"/></svg>'); /* Subtle pattern fallback */
-            background-size: cover; /* Fallback if complex SVG not desired */
-            border-bottom: 2px solid #e0d8d0; /* Subtle separator */
-            position: relative; /* For pseudo-elements or absolute positioning if needed */
+            padding: 2rem 1rem;
+            border-bottom: 2px solid #e0d8d0;
+            position: relative;
         }
-
-        /* Updated Hero H1 for potentially longer name */
         .hero h1 {
             font-family: 'Brush Script MT', 'Brush Script Std', cursive;
-            font-size: clamp(2.8rem, 9vw, 5.5rem); /* Slightly adjusted clamp */
+            font-size: clamp(3rem, 10vw, 5.5rem);
             color: #8a6d5e;
             margin-bottom: 0.5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInHeroText 1.5s ease-out 0.5s forwards;
         }
-
         .hero .sub-title {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: #777;
             margin-top: 0.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInHeroSubText 1.5s ease-out 1s forwards;
         }
 
         /* --- Sections --- */
         section {
-            padding: 4rem 0;
+            padding: 3rem 0;
             text-align: center;
             border-bottom: 1px solid #eee;
         }
         section:last-of-type {
             border-bottom: none;
+            padding-bottom: 4rem;
         }
 
         /* --- Decorative Elements --- */
@@ -125,16 +144,22 @@
             height: 2px;
             background-color: #b58e7e;
             margin: 1.5rem auto;
-            opacity: 0; /* For animation */
         }
-
         .heart-icon {
             display: inline-block;
             color: #d9a99a;
             font-size: 1.5rem;
             margin: 0 0.5rem;
-            animation: pulse 2s infinite ease-in-out;
-            opacity: 0; /* For animation */
+            transform-origin: center center;
+        }
+        /* Heart Pulse Animation: Only runs if JS added .js-enabled */
+        .js-enabled .heart-icon {
+             animation: pulse 2s infinite ease-in-out alternate;
+        }
+        /* Heart Pulse Animation: Keyframes */
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 0.8; }
+            to { transform: scale(1.15); opacity: 1; }
         }
 
         /* --- Button Styling --- */
@@ -146,12 +171,14 @@
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             margin-top: 1.5rem;
+            /* Button Animation: Transitions for hover/focus */
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
         }
-
+        /* Button Animation: Hover/Focus state */
         .cta-button:hover, .cta-button:focus {
             background-color: #8a6d5e;
             color: #fff;
@@ -171,15 +198,16 @@
             padding: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             cursor: grab;
-            transition: box-shadow 0.3s ease, transform 0.1s linear; /* Faster transform for responsiveness */
-             /* Will be manipulated by JS */
-             transform: translate3d(0, 0, 0);
+            transition: box-shadow 0.3s ease, transform 0.2s ease-out;
+            transform: translate3d(0, 0, 0);
+            will-change: transform;
+            touch-action: none;
         }
-        #floating-music-player:active {
+        /* Music Player Animation: Style when dragging (added by JS) */
+        #floating-music-player.dragging {
              cursor: grabbing;
              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
-
         #floating-play-pause {
             background: none;
             border: none;
@@ -193,18 +221,27 @@
             height: 40px;
             padding: 0;
             line-height: 1;
+            /* Player Button Animation: Transition for hover/active */
             transition: transform 0.2s ease;
-            /* Prevent button from interfering with parent's drag */
-            pointer-events: auto; /* Allow clicks on button */
+            pointer-events: auto;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
-         #floating-play-pause:hover {
+         /* Player Button Animation: Hover/Focus/Active states */
+         #floating-play-pause:hover,
+         #floating-play-pause:focus {
              transform: scale(1.1);
+             outline: none;
+         }
+         #floating-play-pause:active {
+              transform: scale(0.95);
          }
 
+        /* Music Player Animation: Pulse when playing (JS adds .playing class) */
         #floating-music-player.playing {
-            animation: pulsePlayer 1.5s infinite ease-in-out;
+             animation: pulsePlayer 1.5s infinite ease-in-out;
         }
-
+        /* Music Player Pulse Animation: Keyframes */
         @keyframes pulsePlayer {
             0% { box-shadow: 0 0 0 0 rgba(160, 125, 110, 0.7), 0 5px 15px rgba(0, 0, 0, 0.2); }
             70% { box-shadow: 0 0 0 10px rgba(160, 125, 110, 0), 0 5px 15px rgba(0, 0, 0, 0.2); }
@@ -214,68 +251,43 @@
         /* Visually hidden container for the YT Player itself */
         #youtube-player-container {
             position: absolute;
-            top: -9999px;
-            left: -9999px;
-            width: 0;
-            height: 0;
+            width: 1px; height: 1px;
             overflow: hidden;
+            clip: rect(0 0 0 0);
+            margin: -1px; padding: 0; border: 0;
         }
-
-        /* --- Animation Classes & Keyframes --- */
-        @keyframes fadeInHeroText { to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInHeroSubText { to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.15); opacity: 1; } }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
-        .animate-on-scroll:nth-child(3) { transition-delay: 0.2s; }
-        .animate-on-scroll:nth-child(4) { transition-delay: 0.3s; }
-        section .animate-on-scroll:nth-child(1) { transition-delay: 0s; }
-        section .animate-on-scroll:nth-child(2) { transition-delay: 0.15s; }
-        section .animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
-        section .animate-on-scroll:nth-child(4) { transition-delay: 0.45s; }
 
         /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .hero h1 { font-size: clamp(2.5rem, 10vw, 4.5rem); } /* Adjust hero H1 for medium */
-            h2 { font-size: 1.8rem; }
             .container { padding: 1.5rem 1rem; }
-            header.hero { min-height: 70vh; }
+            header.hero { min-height: 75vh; }
             #floating-music-player { bottom: 15px; right: 15px; padding: 6px; }
             #floating-play-pause { width: 35px; height: 35px; font-size: 1.6rem; }
         }
-
         @media (max-width: 480px) {
-            html { font-size: 15px; }
-            h1 { font-size: 2.2rem; }
-            .hero h1 { font-size: clamp(2.2rem, 11vw, 3.5rem); } /* Adjust hero H1 for small */
-            h2 { font-size: 1.6rem; }
-            .cta-button { padding: 10px 20px; font-size: 0.9rem; }
+            .cta-button { padding: 10px 20px; }
             #floating-music-player { bottom: 10px; right: 10px; padding: 5px; }
             #floating-play-pause { width: 30px; height: 30px; font-size: 1.4rem; }
+            section { padding: 2.5rem 0; }
         }
 
     </style>
+    <!-- Minimal JS to add js-enabled class EARLY -->
+    <!-- This allows CSS targeting .js-enabled for animations -->
+    <script>document.documentElement.classList.add('js-enabled');</script>
+     <!-- Changed to add class to <html> for slightly earlier potential application -->
 </head>
 <body>
 
     <!-- Hero Section -->
     <header class="hero">
         <div class="container">
+            <!-- Add .animate-on-scroll to elements you want animated -->
             <p class="sub-title animate-on-scroll">Dengan rahmat Tuhan Yang Maha Esa & restu keluarga</p>
-            <!-- Updated Names -->
             <h1 class="animate-on-scroll">Ardi & Diah</h1>
             <p class="sub-title animate-on-scroll">Mengundang Anda untuk merayakan pernikahan kami</p>
             <div class="divider animate-on-scroll"></div>
+            <!-- Heart icon animation is applied via CSS if .js-enabled is present -->
             <span class="heart-icon animate-on-scroll">❤</span>
         </div>
     </header>
@@ -311,7 +323,8 @@
                 <a href="https://www.google.com/maps/search/?api=1&query=Tokopedia+Tower+Jakarta" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
                     Lihat Peta Lokasi
                 </a>
-                 | <a href="#" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
+                 |
+                 <a href="#" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
                     Info Tempat
                 </a>
             </p>
@@ -332,12 +345,14 @@
             <p class="animate-on-scroll">
                 Kehadiran dan doa restu Anda adalah kebahagiaan bagi kami.
             </p>
+             <!-- Button hover/focus animations are handled by CSS -->
             <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button animate-on-scroll">
                 Konfirmasi Kehadiran Disini
             </a>
-            <p class="animate-on-scroll" style="margin-top: 1rem; font-size: 0.9rem;">
-                <!-- Updated Contact Names -->
-                Atau hubungi kami melalui WhatsApp di 0812-3456-7890 (Ardiansyah) / 0877-9876-5432 (Diah)
+            <p class="animate-on-scroll" style="margin-top: 1rem; font-size: 0.9em;">
+                Atau hubungi kami melalui WhatsApp:<br>
+                <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">0812-3456-7890 (Ardiansyah)</a> /
+                <a href="https://wa.me/6287798765432" target="_blank" rel="noopener noreferrer">0877-9876-5432 (Diah)</a>
             </p>
         </div>
     </section>
@@ -351,10 +366,9 @@
                 Doa restu Anda merupakan karunia yang sangat berarti bagi kami.
              </p>
              <p class="animate-on-scroll">
-                Dan jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless melalui:
+                Jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless melalui:
                 <br>
-                 <!-- Updated Account Holder Names -->
-                 <a href="#" target="_blank" rel="noopener noreferrer">Bank Central Asia (BCA) - 1234567890</a> a/n Ardiansyah |
+                 <a href="#" target="_blank" rel="noopener noreferrer">Bank Central Asia (BCA) - 1234567890</a> a/n Ardiansyah <br>
                  <a href="#" target="_blank" rel="noopener noreferrer">GoPay / OVO - 089988776655</a> a/n Diah
              </p>
         </div>
@@ -362,15 +376,18 @@
 
     <footer>
         <div class="container" style="text-align: center; padding-top: 2rem; padding-bottom: 2rem; font-size: 0.9em; color: #888;">
-            <!-- Updated Footer Names -->
             <p>Hormat kami yang berbahagia,<br> Ardiansyah & Diah</p>
+            <!-- Footer heart does not pulse -->
             <span class="heart-icon" style="animation: none; opacity: 1; color: #ccc;">❤</span>
+            <p style="font-size: 0.8em; margin-top: 1rem; color: #aaa;">Invitation crafted with love.</p>
         </div>
     </footer>
 
     <!-- Floating Music Player -->
+    <!-- Pulse animation added via CSS when .playing class is present -->
     <div id="floating-music-player" aria-label="Kontrol Musik">
-        <button id="floating-play-pause" aria-label="Putar Musik">▶️</button>
+        <!-- Hover/active animation added via CSS -->
+        <button id="floating-play-pause" aria-label="Putar Musik">▶️</button> <!-- Play Icon -->
     </div>
 
     <!-- YouTube Player Container (Visually Hidden) -->
@@ -379,319 +396,257 @@
     </div>
 
     <!-- YouTube IFrame Player API -->
-    <!-- Best practice: Load the API script *after* your main script block or ensure onYouTubeIframeAPIReady is globally defined first. -->
-    <!-- Putting it here is usually fine as it asynchronously loads and then calls the global function. -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
-        // --- Scroll Animations ---
-        const animatedElements = document.querySelectorAll('.animate-on-scroll');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    // observer.unobserve(entry.target); // Optional: uncomment to animate only once
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+
+            console.log("DOM Loaded. Initializing scripts.");
+
+             // --- Scroll Animations ---
+            // Check if IntersectionObserver is supported and JS added the class to <html>
+            if ('IntersectionObserver' in window && document.documentElement.classList.contains('js-enabled')) {
+                const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+                if (animatedElements.length > 0) {
+                    // This observer watches elements with .animate-on-scroll
+                    const observer = new IntersectionObserver((entries, observerInstance) => {
+                        entries.forEach(entry => {
+                            // When an element becomes ~10% visible...
+                            if (entry.isIntersecting) {
+                                console.log('Element intersecting, adding .is-visible:', entry.target);
+                                // Add the class that triggers the CSS transition
+                                entry.target.classList.add('is-visible');
+                                // Optional: Stop observing after it's animated once
+                                // observerInstance.unobserve(entry.target);
+                            }
+                            // Optional: Remove class if it scrolls out of view (for re-animation)
+                            // else {
+                            //    entry.target.classList.remove('is-visible');
+                            //}
+                        });
+                    }, {
+                        rootMargin: '0px', // default
+                        threshold: 0.1, // Trigger when 10% of the element is visible
+                     });
+
+                    // Start observing each element
+                    animatedElements.forEach(el => observer.observe(el));
+                    console.log(`IntersectionObserver initialized. Observing ${animatedElements.length} elements.`);
+                } else {
+                     console.warn("No elements with class 'animate-on-scroll' found.");
                 }
-            });
-        }, { threshold: 0.1 });
-        animatedElements.forEach(el => observer.observe(el));
 
-        // --- YouTube Player Logic ---
-        let player; // Holds the YouTube player instance
-        const videoId = 'OSujOd9_fDg'; // Video ID for "Kamu Yang Kutunggu"
-        const floatingPlayerElement = document.getElementById('floating-music-player');
-        const floatingPlayPauseButton = document.getElementById('floating-play-pause');
-        let isPlaying = false; // Track player state
-
-        // This function MUST be global and is called by the YouTube API script once ready
-        function onYouTubeIframeAPIReady() {
-            console.log("YouTube API Ready. Initializing player...");
-            player = new YT.Player('youtube-player', {
-                height: '1', // Minimal size, it's hidden anyway
-                width: '1',
-                videoId: videoId,
-                playerVars: {
-                    'playsinline': 1, // Crucial for mobile playback
-                    'loop': 1,        // Enable looping
-                    'playlist': videoId, // Required for single video loop
-                    'controls': 0, // Hide YT controls
-                    'showinfo': 0, // Hide info
-                    'modestbranding': 1 // Minimal YT branding
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange,
-                    'onError': onPlayerError // Add error handling
-                }
-            });
-        }
-
-        // Called when the player is ready to start playing.
-        function onPlayerReady(event) {
-            console.log("Player Ready.");
-            // Player is ready. Button initially shows "Play".
-            floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
-            // IMPORTANT: Some browsers might still block autoplay attempts here.
-            // It's best to rely on the user clicking the button first.
-            // Example: You could try event.target.playVideo(); but expect it might fail silently.
-        }
-
-        // Called when the player's state changes (playing, paused, ended, etc.)
-        function onPlayerStateChange(event) {
-            console.log("Player State Changed:", event.data);
-            // State codes: -1 (unstarted), 0 (ended), 1 (playing), 2 (paused), 3 (buffering), 5 (video cued)
-            if (event.data == YT.PlayerState.PLAYING) {
-                isPlaying = true;
-                floatingPlayPauseButton.innerHTML = '⏸️'; // Pause Icon
-                floatingPlayerElement.classList.add('playing');
-                floatingPlayPauseButton.setAttribute('aria-label', 'Jeda Musik');
             } else {
-                // Includes PAUSED, ENDED, BUFFERING, CUED, UNSTARTED
+                // Fallback message if observer isn't supported or JS failed earlier
+                console.warn("IntersectionObserver not supported or JS disabled early. Scroll animations inactive.");
+                // Graceful Degradation: Elements will be visible by default if .js-enabled is missing
+                // or if the observer doesn't run, because the initial hidden state in CSS
+                // depends on .js-enabled being present.
+            }
+
+
+            // --- YouTube Player Logic ---
+            let player;
+            const videoId = 'OSujOd9_fDg'; // ** ACTION REQUIRED: Update Video ID **
+            const floatingPlayerElement = document.getElementById('floating-music-player');
+            const floatingPlayPauseButton = document.getElementById('floating-play-pause');
+            let isPlaying = false;
+
+            window.onYouTubeIframeAPIReady = function() {
+                console.log("YouTube API Ready. Initializing player...");
+                if (!document.getElementById('youtube-player')) {
+                     console.error("YouTube player placeholder div (#youtube-player) not found!");
+                     handlePlayerInitializationError();
+                     return;
+                }
+                try {
+                    player = new YT.Player('youtube-player', {
+                        height: '1', width: '1', videoId: videoId,
+                        playerVars: { 'playsinline': 1, 'loop': 1, 'playlist': videoId, 'controls': 0, 'showinfo': 0, 'modestbranding': 1, 'origin': window.location.origin },
+                        events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': onPlayerError }
+                    });
+                } catch (error) {
+                    console.error("Error creating YouTube player instance:", error);
+                    handlePlayerInitializationError();
+                }
+            };
+
+            function onPlayerReady(event) {
+                console.log("Player Ready. State:", event.target.getPlayerState());
+                if(floatingPlayPauseButton) floatingPlayPauseButton.disabled = false;
+                if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
+            }
+
+            function onPlayerStateChange(event) {
+                const newState = event.data;
+                console.log("Player State Changed:", newState);
+
+                // Check if the player is now playing
+                if (newState == YT.PlayerState.PLAYING) {
+                    if (!isPlaying) {
+                         console.log("Callback: State changed to PLAYING");
+                         isPlaying = true;
+                         if(floatingPlayPauseButton) floatingPlayPauseButton.innerHTML = '⏸️';
+                         // Add .playing class to trigger the CSS pulse animation
+                         if(floatingPlayerElement) floatingPlayerElement.classList.add('playing');
+                         if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', 'Jeda Musik');
+                    }
+                } else { // Player is not playing (paused, ended, buffering, etc.)
+                     if (isPlaying) {
+                         console.log("Callback: State changed to NOT PLAYING (State: " + newState + ")");
+                         isPlaying = false;
+                         if(floatingPlayPauseButton) floatingPlayPauseButton.innerHTML = '▶️';
+                         // Remove .playing class to stop the CSS pulse animation
+                         if(floatingPlayerElement) floatingPlayerElement.classList.remove('playing');
+                         if ([YT.PlayerState.PAUSED, YT.PlayerState.ENDED, YT.PlayerState.CUED, -1].includes(newState)) {
+                            if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
+                         }
+                    }
+                }
+            }
+
+            function onPlayerError(event) {
+                console.error("YouTube Player Error Code:", event.data);
+                let errorMessage = 'Musik Error ' + event.data;
+                if(floatingPlayPauseButton) floatingPlayPauseButton.innerHTML = '⚠️';
+                if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', errorMessage);
+                if(floatingPlayerElement) floatingPlayerElement.classList.remove('playing'); // Ensure pulse stops
+                if(floatingPlayPauseButton) floatingPlayPauseButton.disabled = true;
                 isPlaying = false;
-                floatingPlayPauseButton.innerHTML = '▶️'; // Play Icon
-                floatingPlayerElement.classList.remove('playing');
-                // Set label back to 'Play' only if explicitly paused or ended
-                 if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.CUED) {
-                    floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
-                 }
             }
-        }
 
-         // Called if an error occurs in the player
-        function onPlayerError(event) {
-            console.error("YouTube Player Error:", event.data);
-            // Possible error codes: 2, 5, 100, 101, 150
-            // You could inform the user, try to reload, etc.
-            floatingPlayPauseButton.innerHTML = '⚠️'; // Error icon
-            floatingPlayPauseButton.setAttribute('aria-label', 'Musik Error');
-            floatingPlayerElement.classList.remove('playing');
-             isPlaying = false;
-        }
+            function handlePlayerInitializationError() {
+                 console.error("Could not initialize YouTube Player correctly.");
+                 if(floatingPlayPauseButton) floatingPlayPauseButton.innerHTML = '⚠️';
+                 if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', 'Gagal Memuat Musik');
+                 if(floatingPlayerElement) floatingPlayerElement.classList.remove('playing');
+                 if(floatingPlayPauseButton) floatingPlayPauseButton.disabled = true;
+                 isPlaying = false;
+            }
 
-        // --- Button Click to Play/Pause ---
-        floatingPlayPauseButton.addEventListener('click', (e) => {
-            // Prevent this click from being interpreted as the start of a drag
-             e.stopPropagation();
-
-             console.log("Play/Pause button clicked.");
-             // Ensure player is ready and API methods exist before calling them
-            if (player && typeof player.playVideo === 'function' && typeof player.pauseVideo === 'function') {
-                if (isPlaying) {
-                    console.log("Calling pauseVideo()");
-                    player.pauseVideo();
-                } else {
-                    console.log("Calling playVideo()");
-                    player.playVideo(); // YT API handles promise internally
-                }
+            // --- Button Click to Play/Pause ---
+             if (floatingPlayPauseButton) {
+                floatingPlayPauseButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (player && typeof player.playVideo === 'function' && typeof player.pauseVideo === 'function') {
+                         const currentState = player.getPlayerState();
+                         console.log("Button Click: Current player state is", currentState);
+                         if (currentState === YT.PlayerState.PLAYING) {
+                            console.log("Button Click: Pausing video.");
+                            player.pauseVideo();
+                         } else {
+                             console.log("Button Click: Playing video.");
+                             player.playVideo();
+                         }
+                    } else {
+                        console.warn("Play/Pause Click: Player not ready or API methods unavailable.");
+                        if (!player && typeof window.onYouTubeIframeAPIReady === 'function') {
+                            console.log("Attempting YT Player re-initialization...");
+                            window.onYouTubeIframeAPIReady(); // Try to re-init
+                        }
+                    }
+                });
             } else {
-                 console.warn("Player not ready or API methods unavailable yet.");
-                 // Optionally provide user feedback here e.g., change button state briefly
-            }
-        });
-
-        // --- Drag and Drop Logic for Floating Player ---
-        let isDragging = false;
-        let currentX;
-        let currentY;
-        let initialX;
-        let initialY;
-        // Store offset relative to the element's top-left corner, not the initial touch/mouse point
-        let dragOffsetX = 0;
-        let dragOffsetY = 0;
-
-        // Use mousedown/touchstart on the draggable element itself
-        floatingPlayerElement.addEventListener("mousedown", dragStart);
-        floatingPlayerElement.addEventListener("touchstart", dragStart, { passive: false });
-
-        // Use mousemove/touchmove/mouseup/touchend on the document to capture events
-        // even if the cursor moves off the element quickly
-        document.addEventListener("mousemove", drag);
-        document.addEventListener("touchmove", drag, { passive: false });
-
-        document.addEventListener("mouseup", dragEnd);
-        document.addEventListener("touchend", dragEnd);
-
-
-        function dragStart(e) {
-            // Calculate the offset from the element's corner to the click/touch point
-            const rect = floatingPlayerElement.getBoundingClientRect();
-
-            if (e.type === "touchstart") {
-                 // Prevent default scroll/zoom behaviour when starting drag on the element
-                 e.preventDefault();
-                 // Use the *first* touch point
-                 dragOffsetX = e.touches[0].clientX - rect.left;
-                 dragOffsetY = e.touches[0].clientY - rect.top;
-                 initialX = e.touches[0].clientX; // Store initial mouse/touch position
-                 initialY = e.touches[0].clientY;
-            } else {
-                // For mouse events, only drag with the primary button (usually left)
-                if (e.button !== 0) return;
-                dragOffsetX = e.clientX - rect.left;
-                dragOffsetY = e.clientY - rect.top;
-                initialX = e.clientX;
-                initialY = e.clientY;
+                 console.error("Floating play/pause button not found!");
             }
 
-            isDragging = true;
-            floatingPlayerElement.style.cursor = 'grabbing';
-            // Optional: Add a class for visual feedback during drag
-            // floatingPlayerElement.classList.add('dragging');
-        }
+            // --- Draggable Music Player Logic ---
+            if (floatingPlayerElement) {
+                let isDragging = false;
+                let startX, startY, initialX, initialY;
 
-        function drag(e) {
-            if (isDragging) {
-                 // Prevent default actions during move (like text selection, page scroll)
-                 e.preventDefault();
+                function dragStart(e) {
+                    if (e.target === floatingPlayPauseButton || floatingPlayPauseButton.disabled) return;
+                    isDragging = true;
+                    // Add .dragging class for CSS styles
+                    floatingPlayerElement.classList.add('dragging');
+                    floatingPlayerElement.style.transition = 'none'; // Disable transition during drag
 
-                 let clientX, clientY;
-                 if (e.type === "touchmove") {
-                    clientX = e.touches[0].clientX;
-                    clientY = e.touches[0].clientY;
-                 } else {
-                    clientX = e.clientX;
-                    clientY = e.clientY;
-                 }
+                    const style = window.getComputedStyle(floatingPlayerElement);
+                    const matrix = new DOMMatrixReadOnly(style.transform);
+                    initialX = matrix.m41;
+                    initialY = matrix.m42;
 
-                 // Calculate the new top-left position based on mouse/touch position and the initial offset
-                 currentX = clientX - dragOffsetX;
-                 currentY = clientY - dragOffsetY;
-
-                 // Boundary checks (optional: keep element within viewport)
-                 const vw = document.documentElement.clientWidth;
-                 const vh = document.documentElement.clientHeight;
-                 const elWidth = floatingPlayerElement.offsetWidth;
-                 const elHeight = floatingPlayerElement.offsetHeight;
-
-                 currentX = Math.max(0, Math.min(currentX, vw - elWidth));
-                 currentY = Math.max(0, Math.min(currentY, vh - elHeight));
-
-
-                 // Set position using style.left and style.top
-                 // Important: For this to work, change the CSS position from bottom/right to top/left initially
-                 // OR continue using transform (more performant)
-
-                 // Using transform (relative to original CSS position) - Simpler if keeping bottom/right
-                  let deltaX = clientX - initialX;
-                  let deltaY = clientY - initialY;
-                  // We need the *cumulative* transform offset, not just relative to initial CSS pos
-                  // Let's stick to updating top/left for simplicity here.
-                  // To use transform effectively like this, need to parse existing transform.
-
-                 // **Change Approach: Use top/left positioning**
-                 // Remove bottom, right from CSS. Set top, left initial values.
-                 // floatingPlayerElement.style.right = 'auto'; // Remove CSS positioning
-                 // floatingPlayerElement.style.bottom = 'auto';
-                 // floatingPlayerElement.style.left = `${currentX}px`;
-                 // floatingPlayerElement.style.top = `${currentY}px`;
-
-                 // **Alternative: Keep CSS bottom/right and use Transform**
-                 // This requires calculating the transform delta based on initial CSS pos
-                 // For now, let's assume we are setting top/left directly (requires CSS change)
-                 // *** REVERTING to previous transform method as it's simpler without CSS change ***
-
-                 // Calculate the *change* in position from the start of the drag
-                 let translateX = clientX - initialX;
-                 let translateY = clientY - initialY;
-
-                 // We need to store the *previous* transform to add to it.
-                 // This gets complex. Let's simplify: Store the final position offset.
-
-                 // *** RE-REVERTING: Simpler transform logic ***
-                 // Store the element's translation offset globally
-                 // This requires a global variable like `elementTranslateX`, `elementTranslateY`
-
-                 // *** FINAL APPROACH: Use initial offset calculation ***
-                 // Calculate final desired top/left based on cursor and offset
-                 // Then apply transform based on the *change* from the *very first* position.
-
-                 // Let's try the simpler direct transform update again. Assume the previous transform state is stored.
-                 // This requires `xOffset` and `yOffset` to store the *total accumulated* transform.
-                 // Re-introducing `xOffset` and `yOffset` from previous attempt
-
-                // On drag start, get the current transform (if any)
-                // This part is tricky. Let's restart the drag logic cleanly.
-
-                // ---- Clean Drag Logic using Transform ----
-                if (e.type === "touchmove") {
-                    currentX = e.touches[0].clientX; // Current finger position
-                    currentY = e.touches[0].clientY;
-                } else {
-                    currentX = e.clientX; // Current mouse position
-                    currentY = e.clientY;
+                    if (e.type === 'mousedown') {
+                        startX = e.clientX; startY = e.clientY;
+                        document.addEventListener('mousemove', dragMove);
+                        document.addEventListener('mouseup', dragEnd);
+                    } else if (e.type === 'touchstart') {
+                        const touch = e.touches[0];
+                        startX = touch.clientX; startY = touch.clientY;
+                        document.addEventListener('touchmove', dragMove, { passive: false }); // Need passive:false to call preventDefault
+                        document.addEventListener('touchend', dragEnd);
+                        document.addEventListener('touchcancel', dragEnd);
+                    }
+                    console.log("Drag Start - Initial Pos:", initialX, initialY);
                 }
 
-                // Calculate how much the pointer has moved since drag start
-                let deltaX = currentX - initialX;
-                let deltaY = currentY - initialY;
+                function dragMove(e) {
+                    if (!isDragging) return;
+                    // Prevent page scroll while dragging element on touch devices
+                    if (e.cancelable) e.preventDefault();
 
-                // Apply this delta to the element's transform
-                // Need to know the transform at the *start* of the drag
-                // Let's store the transform offset state globally
-                setTranslate(dragStartTransformX + deltaX, dragStartTransformY + deltaY, floatingPlayerElement);
+                    let currentX, currentY;
+                    if (e.type === 'mousemove') {
+                        currentX = e.clientX; currentY = e.clientY;
+                    } else if (e.type === 'touchmove' && e.touches.length > 0) {
+                        const touch = e.touches[0];
+                        currentX = touch.clientX; currentY = touch.clientY;
+                    } else { return; }
 
+                    const dx = currentX - startX;
+                    const dy = currentY - startY;
+                    let newX = initialX + dx;
+                    let newY = initialY + dy;
 
+                    // Simple Boundary checks
+                    const parentWidth = window.innerWidth;
+                    const parentHeight = window.innerHeight;
+                    const elemWidth = floatingPlayerElement.offsetWidth;
+                    const elemHeight = floatingPlayerElement.offsetHeight;
+                    newX = Math.max(0, Math.min(newX, parentWidth - elemWidth));
+                    newY = Math.max(0, Math.min(newY, parentHeight - elemHeight));
+
+                    floatingPlayerElement.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
+                }
+
+                function dragEnd(e) {
+                    if (!isDragging) return;
+                    isDragging = false;
+                     // Remove .dragging class
+                    floatingPlayerElement.classList.remove('dragging');
+                    floatingPlayerElement.style.transition = ''; // Re-enable transitions
+
+                    if (e.type === 'mouseup' || e.type === 'mousemove') {
+                        document.removeEventListener('mousemove', dragMove);
+                        document.removeEventListener('mouseup', dragEnd);
+                    } else {
+                        document.removeEventListener('touchmove', dragMove);
+                        document.removeEventListener('touchend', dragEnd);
+                        document.removeEventListener('touchcancel', dragEnd);
+                    }
+                    console.log("Drag End");
+                }
+
+                floatingPlayerElement.addEventListener('mousedown', dragStart);
+                floatingPlayerElement.addEventListener('touchstart', dragStart, { passive: true }); // passive:true is okay for start
+
+            } else {
+                 console.error("Draggable player element (#floating-music-player) not found!");
             }
-        }
 
-        // Need global vars to store the transform state *before* a drag starts
-        let dragStartTransformX = 0;
-        let dragStartTransformY = 0;
+             // --- Initial setup checks ---
+             if (!floatingPlayerElement || !floatingPlayPauseButton) {
+                 console.error("Floating player elements could not be found!");
+             } else {
+                  // Disable button until YT player is ready
+                  floatingPlayPauseButton.disabled = true;
+                  console.log("Floating player elements found and initialized.");
+             }
 
-        function dragEnd(e) {
-            if (!isDragging) return; // Only process if we were actually dragging
-
-            isDragging = false;
-            floatingPlayerElement.style.cursor = 'grab';
-
-            // Store the final transform values for the next drag operation
-             const currentTransform = getComputedTranslateXY(floatingPlayerElement);
-             dragStartTransformX = currentTransform.x;
-             dragStartTransformY = currentTransform.y;
-
-            // Optional: Remove drag class
-            // floatingPlayerElement.classList.remove('dragging');
-        }
-
-        function setTranslate(xPos, yPos, el) {
-            el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-        }
-
-        // Helper function to get current translate values
-        function getComputedTranslateXY(element) {
-            const style = window.getComputedStyle(element);
-            const matrix = style.transform || style.webkitTransform || style.mozTransform;
-            let x = 0;
-            let y = 0;
-
-            // No transform property
-            if (matrix === 'none' || typeof matrix === 'undefined') {
-                return { x: 0, y: 0 };
-            }
-
-            // Matrix transform (e.g., matrix(1, 0, 0, 1, x, y))
-            const matrixType = matrix.includes('3d') ? '3d' : '2d';
-            const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ');
-
-            if (matrixType === '2d') {
-                x = parseFloat(matrixValues[4]) || 0;
-                y = parseFloat(matrixValues[5]) || 0;
-            } else { // 3d matrix (e.g., matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1))
-                x = parseFloat(matrixValues[12]) || 0;
-                y = parseFloat(matrixValues[13]) || 0;
-            }
-            return { x, y };
-        }
-
-        // Initialize the drag start transform state from initial computed style
-        // Do this after element is rendered - use DOMContentLoaded or window.onload
-         window.addEventListener('DOMContentLoaded', () => {
-             const initialTransform = getComputedTranslateXY(floatingPlayerElement);
-             dragStartTransformX = initialTransform.x;
-             dragStartTransformY = initialTransform.y;
-         });
-
-
+        }); // End DOMContentLoaded listener
     </script>
 
 </body>
