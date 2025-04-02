@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated Title -->
     <title>Undangan Pernikahan Ardi & Diah</title>
     <style>
         /* --- Basic Reset & Setup --- */
@@ -25,6 +26,8 @@
             background-image: radial-gradient(circle at top left, rgba(240, 220, 200, 0.1), transparent 40%),
                               radial-gradient(circle at bottom right, rgba(210, 190, 220, 0.1), transparent 50%);
             overflow-x: hidden; /* Prevent horizontal scroll */
+            /* Ensure body takes at least full viewport height to prevent drag issues on short pages */
+            min-height: 100vh;
         }
 
         /* --- Typography --- */
@@ -86,30 +89,31 @@
             position: relative; /* For pseudo-elements or absolute positioning if needed */
         }
 
+        /* Updated Hero H1 for potentially longer name */
         .hero h1 {
-            font-family: 'Brush Script MT', 'Brush Script Std', cursive; /* Elegant script font */
-            font-size: clamp(3rem, 10vw, 6rem); /* Responsive font size */
+            font-family: 'Brush Script MT', 'Brush Script Std', cursive;
+            font-size: clamp(2.8rem, 9vw, 5.5rem); /* Slightly adjusted clamp */
             color: #8a6d5e;
             margin-bottom: 0.5rem;
-            opacity: 0; /* Initially hidden for animation */
-            transform: translateY(30px); /* Initially moved down */
-            animation: fadeInHeroText 1.5s ease-out 0.5s forwards; /* Animation */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInHeroText 1.5s ease-out 0.5s forwards;
         }
 
         .hero .sub-title {
             font-size: 1.2rem;
             color: #777;
             margin-top: 0.5rem;
-            opacity: 0; /* Initially hidden */
+            opacity: 0;
             transform: translateY(20px);
-            animation: fadeInHeroSubText 1.5s ease-out 1s forwards; /* Delayed animation */
+            animation: fadeInHeroSubText 1.5s ease-out 1s forwards;
         }
 
         /* --- Sections --- */
         section {
-            padding: 4rem 0; /* Vertical padding */
+            padding: 4rem 0;
             text-align: center;
-            border-bottom: 1px solid #eee; /* Subtle section separation */
+            border-bottom: 1px solid #eee;
         }
         section:last-of-type {
             border-bottom: none;
@@ -119,14 +123,14 @@
         .divider {
             width: 80px;
             height: 2px;
-            background-color: #b58e7e; /* Muted rose gold */
+            background-color: #b58e7e;
             margin: 1.5rem auto;
             opacity: 0; /* For animation */
         }
 
         .heart-icon {
             display: inline-block;
-            color: #d9a99a; /* Soft pinkish color */
+            color: #d9a99a;
             font-size: 1.5rem;
             margin: 0 0.5rem;
             animation: pulse 2s infinite ease-in-out;
@@ -136,23 +140,23 @@
         /* --- Button Styling --- */
         .cta-button {
             display: inline-block;
-            background-color: #a07d6e; /* Primary button color */
+            background-color: #a07d6e;
             color: #fff;
             padding: 12px 25px;
-            border-radius: 25px; /* Rounded button */
+            border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1rem;
             margin-top: 1.5rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .cta-button:hover, .cta-button:focus {
-            background-color: #8a6d5e; /* Darker shade on hover */
+            background-color: #8a6d5e;
             color: #fff;
             text-decoration: none;
-            transform: translateY(-2px); /* Slight lift effect */
+            transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
@@ -161,15 +165,17 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 1000; /* Ensure it's above other content */
-            background-color: rgba(160, 125, 110, 0.9); /* Semi-transparent button color */
-            border-radius: 50%; /* Make the container circular */
-            padding: 8px; /* Padding around the button */
+            z-index: 1000;
+            background-color: rgba(160, 125, 110, 0.9);
+            border-radius: 50%;
+            padding: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            cursor: grab; /* Indicate it's draggable */
-            transition: box-shadow 0.3s ease;
+            cursor: grab;
+            transition: box-shadow 0.3s ease, transform 0.1s linear; /* Faster transform for responsiveness */
+             /* Will be manipulated by JS */
+             transform: translate3d(0, 0, 0);
         }
-        #floating-music-player:active { /* Style when dragging */
+        #floating-music-player:active {
              cursor: grabbing;
              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
@@ -178,30 +184,31 @@
             background: none;
             border: none;
             color: #fff;
-            font-size: 1.8rem; /* Icon size */
+            font-size: 1.8rem;
             cursor: pointer;
-            display: flex; /* Center icon */
+            display: flex;
             justify-content: center;
             align-items: center;
-            width: 40px;  /* Button dimensions */
+            width: 40px;
             height: 40px;
-            padding: 0; /* Remove default button padding */
-            line-height: 1; /* Ensure icon is centered vertically */
+            padding: 0;
+            line-height: 1;
             transition: transform 0.2s ease;
+            /* Prevent button from interfering with parent's drag */
+            pointer-events: auto; /* Allow clicks on button */
         }
          #floating-play-pause:hover {
              transform: scale(1.1);
          }
 
-        /* Animation for the container when playing */
         #floating-music-player.playing {
             animation: pulsePlayer 1.5s infinite ease-in-out;
         }
 
         @keyframes pulsePlayer {
-            0% { box-shadow: 0 0 0 0 rgba(160, 125, 110, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(160, 125, 110, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(160, 125, 110, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(160, 125, 110, 0.7), 0 5px 15px rgba(0, 0, 0, 0.2); }
+            70% { box-shadow: 0 0 0 10px rgba(160, 125, 110, 0), 0 5px 15px rgba(0, 0, 0, 0.2); }
+            100% { box-shadow: 0 0 0 0 rgba(160, 125, 110, 0), 0 5px 15px rgba(0, 0, 0, 0.2); }
         }
 
         /* Visually hidden container for the YT Player itself */
@@ -213,7 +220,6 @@
             height: 0;
             overflow: hidden;
         }
-
 
         /* --- Animation Classes & Keyframes --- */
         @keyframes fadeInHeroText { to { opacity: 1; transform: translateY(0); } }
@@ -240,20 +246,21 @@
         /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: clamp(2.5rem, 10vw, 4.5rem); } /* Adjust hero H1 for medium */
             h2 { font-size: 1.8rem; }
             .container { padding: 1.5rem 1rem; }
             header.hero { min-height: 70vh; }
-            #floating-music-player { bottom: 15px; right: 15px; }
+            #floating-music-player { bottom: 15px; right: 15px; padding: 6px; }
             #floating-play-pause { width: 35px; height: 35px; font-size: 1.6rem; }
         }
 
         @media (max-width: 480px) {
             html { font-size: 15px; }
             h1 { font-size: 2.2rem; }
-             .hero h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
+            .hero h1 { font-size: clamp(2.2rem, 11vw, 3.5rem); } /* Adjust hero H1 for small */
             h2 { font-size: 1.6rem; }
             .cta-button { padding: 10px 20px; font-size: 0.9rem; }
-            #floating-music-player { bottom: 10px; right: 10px; padding: 6px; }
+            #floating-music-player { bottom: 10px; right: 10px; padding: 5px; }
             #floating-play-pause { width: 30px; height: 30px; font-size: 1.4rem; }
         }
 
@@ -265,6 +272,7 @@
     <header class="hero">
         <div class="container">
             <p class="sub-title animate-on-scroll">Dengan rahmat Tuhan Yang Maha Esa & restu keluarga</p>
+            <!-- Updated Names -->
             <h1 class="animate-on-scroll">Ardi & Diah</h1>
             <p class="sub-title animate-on-scroll">Mengundang Anda untuk merayakan pernikahan kami</p>
             <div class="divider animate-on-scroll"></div>
@@ -280,7 +288,7 @@
             <p class="animate-on-scroll">Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
             <h3 class="animate-on-scroll">Tanggal & Waktu</h3>
             <p class="animate-on-scroll">
-                <strong>Sabtu, 6 September 2099</strong><br>
+                <strong>Sabtu, 6 September 2035</strong><br>
                 Akad Nikah: Pukul 09:00 WIB <br>
                 Resepsi: Pukul 11:00 - 14:00 WIB
             </p>
@@ -328,7 +336,8 @@
                 Konfirmasi Kehadiran Disini
             </a>
             <p class="animate-on-scroll" style="margin-top: 1rem; font-size: 0.9rem;">
-                Atau hubungi kami melalui WhatsApp di 0812-3456-7890 (Ardi) / 0877-9876-5432 (Diah)
+                <!-- Updated Contact Names -->
+                Atau hubungi kami melalui WhatsApp di 0812-3456-7890 (Ardiansyah) / 0877-9876-5432 (Diah)
             </p>
         </div>
     </section>
@@ -344,15 +353,17 @@
              <p class="animate-on-scroll">
                 Dan jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless melalui:
                 <br>
-                 <a href="#" target="_blank" rel="noopener noreferrer">Bank Central Asia (BCA) - 1234567890</a> a/n Ardi Pratama |
-                 <a href="#" target="_blank" rel="noopener noreferrer">GoPay / OVO - 089988776655</a> a/n Diah Lestari
+                 <!-- Updated Account Holder Names -->
+                 <a href="#" target="_blank" rel="noopener noreferrer">Bank Central Asia (BCA) - 1234567890</a> a/n Ardiansyah |
+                 <a href="#" target="_blank" rel="noopener noreferrer">GoPay / OVO - 089988776655</a> a/n Diah
              </p>
         </div>
     </section>
 
     <footer>
         <div class="container" style="text-align: center; padding-top: 2rem; padding-bottom: 2rem; font-size: 0.9em; color: #888;">
-            <p>Hormat kami yang berbahagia,<br> Ardi & Diah</p>
+            <!-- Updated Footer Names -->
+            <p>Hormat kami yang berbahagia,<br> Ardiansyah & Diah</p>
             <span class="heart-icon" style="animation: none; opacity: 1; color: #ccc;">❤</span>
         </div>
     </footer>
@@ -368,6 +379,8 @@
     </div>
 
     <!-- YouTube IFrame Player API -->
+    <!-- Best practice: Load the API script *after* your main script block or ensure onYouTubeIframeAPIReady is globally defined first. -->
+    <!-- Putting it here is usually fine as it asynchronously loads and then calls the global function. -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
@@ -384,55 +397,95 @@
         animatedElements.forEach(el => observer.observe(el));
 
         // --- YouTube Player Logic ---
-        let player;
+        let player; // Holds the YouTube player instance
         const videoId = 'OSujOd9_fDg'; // Video ID for "Kamu Yang Kutunggu"
         const floatingPlayerElement = document.getElementById('floating-music-player');
         const floatingPlayPauseButton = document.getElementById('floating-play-pause');
-        let isPlaying = false;
+        let isPlaying = false; // Track player state
 
+        // This function MUST be global and is called by the YouTube API script once ready
         function onYouTubeIframeAPIReady() {
+            console.log("YouTube API Ready. Initializing player...");
             player = new YT.Player('youtube-player', {
-                height: '0', width: '0', videoId: videoId,
-                playerVars: { 'playsinline': 1, 'loop': 1, 'playlist': videoId },
+                height: '1', // Minimal size, it's hidden anyway
+                width: '1',
+                videoId: videoId,
+                playerVars: {
+                    'playsinline': 1, // Crucial for mobile playback
+                    'loop': 1,        // Enable looping
+                    'playlist': videoId, // Required for single video loop
+                    'controls': 0, // Hide YT controls
+                    'showinfo': 0, // Hide info
+                    'modestbranding': 1 // Minimal YT branding
+                },
                 events: {
                     'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError // Add error handling
                 }
             });
         }
 
+        // Called when the player is ready to start playing.
         function onPlayerReady(event) {
+            console.log("Player Ready.");
             // Player is ready. Button initially shows "Play".
             floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
+            // IMPORTANT: Some browsers might still block autoplay attempts here.
+            // It's best to rely on the user clicking the button first.
+            // Example: You could try event.target.playVideo(); but expect it might fail silently.
         }
 
+        // Called when the player's state changes (playing, paused, ended, etc.)
         function onPlayerStateChange(event) {
+            console.log("Player State Changed:", event.data);
+            // State codes: -1 (unstarted), 0 (ended), 1 (playing), 2 (paused), 3 (buffering), 5 (video cued)
             if (event.data == YT.PlayerState.PLAYING) {
                 isPlaying = true;
                 floatingPlayPauseButton.innerHTML = '⏸️'; // Pause Icon
-                floatingPlayerElement.classList.add('playing'); // Add class for animation
+                floatingPlayerElement.classList.add('playing');
                 floatingPlayPauseButton.setAttribute('aria-label', 'Jeda Musik');
             } else {
+                // Includes PAUSED, ENDED, BUFFERING, CUED, UNSTARTED
                 isPlaying = false;
                 floatingPlayPauseButton.innerHTML = '▶️'; // Play Icon
-                floatingPlayerElement.classList.remove('playing'); // Remove class for animation
-                 // Set label back to 'Play' only if paused/ended, not buffering etc.
-                 if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                floatingPlayerElement.classList.remove('playing');
+                // Set label back to 'Play' only if explicitly paused or ended
+                 if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.CUED) {
                     floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
                  }
             }
         }
 
+         // Called if an error occurs in the player
+        function onPlayerError(event) {
+            console.error("YouTube Player Error:", event.data);
+            // Possible error codes: 2, 5, 100, 101, 150
+            // You could inform the user, try to reload, etc.
+            floatingPlayPauseButton.innerHTML = '⚠️'; // Error icon
+            floatingPlayPauseButton.setAttribute('aria-label', 'Musik Error');
+            floatingPlayerElement.classList.remove('playing');
+             isPlaying = false;
+        }
+
+        // --- Button Click to Play/Pause ---
         floatingPlayPauseButton.addEventListener('click', (e) => {
-             e.stopPropagation(); // Prevent click from triggering drag start if quick click
-            if (player && typeof player.playVideo === 'function') {
+            // Prevent this click from being interpreted as the start of a drag
+             e.stopPropagation();
+
+             console.log("Play/Pause button clicked.");
+             // Ensure player is ready and API methods exist before calling them
+            if (player && typeof player.playVideo === 'function' && typeof player.pauseVideo === 'function') {
                 if (isPlaying) {
+                    console.log("Calling pauseVideo()");
                     player.pauseVideo();
                 } else {
-                    player.playVideo();
+                    console.log("Calling playVideo()");
+                    player.playVideo(); // YT API handles promise internally
                 }
             } else {
-                 console.log("YouTube player not ready yet.");
+                 console.warn("Player not ready or API methods unavailable yet.");
+                 // Optionally provide user feedback here e.g., change button state briefly
             }
         });
 
@@ -442,76 +495,204 @@
         let currentY;
         let initialX;
         let initialY;
-        let xOffset = 0;
-        let yOffset = 0;
+        // Store offset relative to the element's top-left corner, not the initial touch/mouse point
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
 
+        // Use mousedown/touchstart on the draggable element itself
         floatingPlayerElement.addEventListener("mousedown", dragStart);
-        document.addEventListener("mouseup", dragEnd);
-        document.addEventListener("mousemove", drag);
+        floatingPlayerElement.addEventListener("touchstart", dragStart, { passive: false });
 
-        // Touch event equivalents
-        floatingPlayerElement.addEventListener("touchstart", dragStart, { passive: false }); // passive:false to prevent scroll
+        // Use mousemove/touchmove/mouseup/touchend on the document to capture events
+        // even if the cursor moves off the element quickly
+        document.addEventListener("mousemove", drag);
+        document.addEventListener("touchmove", drag, { passive: false });
+
+        document.addEventListener("mouseup", dragEnd);
         document.addEventListener("touchend", dragEnd);
-        document.addEventListener("touchmove", drag, { passive: false }); // passive:false to prevent scroll
+
 
         function dragStart(e) {
-            // Determine if it's a touch or mouse event
+            // Calculate the offset from the element's corner to the click/touch point
+            const rect = floatingPlayerElement.getBoundingClientRect();
+
             if (e.type === "touchstart") {
-                 // For touch, prevent default scroll/zoom behaviour on the element
+                 // Prevent default scroll/zoom behaviour when starting drag on the element
                  e.preventDefault();
-                 initialX = e.touches[0].clientX - xOffset;
-                 initialY = e.touches[0].clientY - yOffset;
+                 // Use the *first* touch point
+                 dragOffsetX = e.touches[0].clientX - rect.left;
+                 dragOffsetY = e.touches[0].clientY - rect.top;
+                 initialX = e.touches[0].clientX; // Store initial mouse/touch position
+                 initialY = e.touches[0].clientY;
             } else {
-                initialX = e.clientX - xOffset;
-                initialY = e.clientY - yOffset;
+                // For mouse events, only drag with the primary button (usually left)
+                if (e.button !== 0) return;
+                dragOffsetX = e.clientX - rect.left;
+                dragOffsetY = e.clientY - rect.top;
+                initialX = e.clientX;
+                initialY = e.clientY;
             }
 
-            // Check if the event target is the button itself or the container
-            // Only start dragging if the event started on the container background, not the button
-            // Although, simpler UX might be to allow dragging from anywhere on the element. Let's allow dragging from anywhere for now.
-            // if (e.target === floatingPlayPauseButton) return; // Uncomment this line to prevent dragging start from the button
-
             isDragging = true;
-            floatingPlayerElement.style.cursor = 'grabbing'; // Change cursor
-        }
-
-        function dragEnd(e) {
-            initialX = currentX;
-            initialY = currentY;
-            isDragging = false;
-            floatingPlayerElement.style.cursor = 'grab'; // Reset cursor
+            floatingPlayerElement.style.cursor = 'grabbing';
+            // Optional: Add a class for visual feedback during drag
+            // floatingPlayerElement.classList.add('dragging');
         }
 
         function drag(e) {
             if (isDragging) {
-                 // Prevent default actions during move (like text selection)
+                 // Prevent default actions during move (like text selection, page scroll)
                  e.preventDefault();
 
-                // Determine if it's a touch or mouse event
+                 let clientX, clientY;
+                 if (e.type === "touchmove") {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                 } else {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                 }
+
+                 // Calculate the new top-left position based on mouse/touch position and the initial offset
+                 currentX = clientX - dragOffsetX;
+                 currentY = clientY - dragOffsetY;
+
+                 // Boundary checks (optional: keep element within viewport)
+                 const vw = document.documentElement.clientWidth;
+                 const vh = document.documentElement.clientHeight;
+                 const elWidth = floatingPlayerElement.offsetWidth;
+                 const elHeight = floatingPlayerElement.offsetHeight;
+
+                 currentX = Math.max(0, Math.min(currentX, vw - elWidth));
+                 currentY = Math.max(0, Math.min(currentY, vh - elHeight));
+
+
+                 // Set position using style.left and style.top
+                 // Important: For this to work, change the CSS position from bottom/right to top/left initially
+                 // OR continue using transform (more performant)
+
+                 // Using transform (relative to original CSS position) - Simpler if keeping bottom/right
+                  let deltaX = clientX - initialX;
+                  let deltaY = clientY - initialY;
+                  // We need the *cumulative* transform offset, not just relative to initial CSS pos
+                  // Let's stick to updating top/left for simplicity here.
+                  // To use transform effectively like this, need to parse existing transform.
+
+                 // **Change Approach: Use top/left positioning**
+                 // Remove bottom, right from CSS. Set top, left initial values.
+                 // floatingPlayerElement.style.right = 'auto'; // Remove CSS positioning
+                 // floatingPlayerElement.style.bottom = 'auto';
+                 // floatingPlayerElement.style.left = `${currentX}px`;
+                 // floatingPlayerElement.style.top = `${currentY}px`;
+
+                 // **Alternative: Keep CSS bottom/right and use Transform**
+                 // This requires calculating the transform delta based on initial CSS pos
+                 // For now, let's assume we are setting top/left directly (requires CSS change)
+                 // *** REVERTING to previous transform method as it's simpler without CSS change ***
+
+                 // Calculate the *change* in position from the start of the drag
+                 let translateX = clientX - initialX;
+                 let translateY = clientY - initialY;
+
+                 // We need to store the *previous* transform to add to it.
+                 // This gets complex. Let's simplify: Store the final position offset.
+
+                 // *** RE-REVERTING: Simpler transform logic ***
+                 // Store the element's translation offset globally
+                 // This requires a global variable like `elementTranslateX`, `elementTranslateY`
+
+                 // *** FINAL APPROACH: Use initial offset calculation ***
+                 // Calculate final desired top/left based on cursor and offset
+                 // Then apply transform based on the *change* from the *very first* position.
+
+                 // Let's try the simpler direct transform update again. Assume the previous transform state is stored.
+                 // This requires `xOffset` and `yOffset` to store the *total accumulated* transform.
+                 // Re-introducing `xOffset` and `yOffset` from previous attempt
+
+                // On drag start, get the current transform (if any)
+                // This part is tricky. Let's restart the drag logic cleanly.
+
+                // ---- Clean Drag Logic using Transform ----
                 if (e.type === "touchmove") {
-                    currentX = e.touches[0].clientX - initialX;
-                    currentY = e.touches[0].clientY - initialY;
+                    currentX = e.touches[0].clientX; // Current finger position
+                    currentY = e.touches[0].clientY;
                 } else {
-                    currentX = e.clientX - initialX;
-                    currentY = e.clientY - initialY;
+                    currentX = e.clientX; // Current mouse position
+                    currentY = e.clientY;
                 }
 
-                xOffset = currentX;
-                yOffset = currentY;
+                // Calculate how much the pointer has moved since drag start
+                let deltaX = currentX - initialX;
+                let deltaY = currentY - initialY;
 
-                setTranslate(currentX, currentY, floatingPlayerElement);
+                // Apply this delta to the element's transform
+                // Need to know the transform at the *start* of the drag
+                // Let's store the transform offset state globally
+                setTranslate(dragStartTransformX + deltaX, dragStartTransformY + deltaY, floatingPlayerElement);
+
+
             }
         }
 
-        function setTranslate(xPos, yPos, el) {
-            // Use transform for smoother performance than changing top/left
-             el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-             // Important: We set the initial position via CSS (bottom/right).
-             // Dragging applies a transform relative to that initial position.
+        // Need global vars to store the transform state *before* a drag starts
+        let dragStartTransformX = 0;
+        let dragStartTransformY = 0;
+
+        function dragEnd(e) {
+            if (!isDragging) return; // Only process if we were actually dragging
+
+            isDragging = false;
+            floatingPlayerElement.style.cursor = 'grab';
+
+            // Store the final transform values for the next drag operation
+             const currentTransform = getComputedTranslateXY(floatingPlayerElement);
+             dragStartTransformX = currentTransform.x;
+             dragStartTransformY = currentTransform.y;
+
+            // Optional: Remove drag class
+            // floatingPlayerElement.classList.remove('dragging');
         }
+
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+        }
+
+        // Helper function to get current translate values
+        function getComputedTranslateXY(element) {
+            const style = window.getComputedStyle(element);
+            const matrix = style.transform || style.webkitTransform || style.mozTransform;
+            let x = 0;
+            let y = 0;
+
+            // No transform property
+            if (matrix === 'none' || typeof matrix === 'undefined') {
+                return { x: 0, y: 0 };
+            }
+
+            // Matrix transform (e.g., matrix(1, 0, 0, 1, x, y))
+            const matrixType = matrix.includes('3d') ? '3d' : '2d';
+            const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ');
+
+            if (matrixType === '2d') {
+                x = parseFloat(matrixValues[4]) || 0;
+                y = parseFloat(matrixValues[5]) || 0;
+            } else { // 3d matrix (e.g., matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1))
+                x = parseFloat(matrixValues[12]) || 0;
+                y = parseFloat(matrixValues[13]) || 0;
+            }
+            return { x, y };
+        }
+
+        // Initialize the drag start transform state from initial computed style
+        // Do this after element is rendered - use DOMContentLoaded or window.onload
+         window.addEventListener('DOMContentLoaded', () => {
+             const initialTransform = getComputedTranslateXY(floatingPlayerElement);
+             dragStartTransformX = initialTransform.x;
+             dragStartTransformY = initialTransform.y;
+         });
+
 
     </script>
 
 </body>
 </html>
-                    
