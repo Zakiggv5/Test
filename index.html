@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="id"> {/* Ubah bahasa ke Indonesia */}
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan Ardi & Irfan</title> {/* Judul diubah */}
+    <!-- Updated Title -->
+    <title>Undangan Pernikahan Ardi & Diah</title>
     <style>
         /* --- Basic Reset & Setup --- */
         *, *::before, *::after {
@@ -156,6 +157,85 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
+        /* --- Music Section Styling --- */
+        #music-section {
+             background-color: rgba(253, 251, 248, 0.5); /* Slightly transparent background */
+             padding: 2rem 0; /* Reduced padding */
+             border-bottom: 1px solid #eee;
+             text-align: center;
+        }
+
+        #music-section h2 {
+            margin-top: 0; /* Remove default top margin */
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem; /* Slightly smaller heading */
+        }
+
+        #youtube-player-container {
+            position: relative;
+            width: 0; /* Hide the actual player visually */
+            height: 0;
+            overflow: hidden;
+        }
+
+        #play-pause-button {
+            background-color: #a07d6e;
+            color: #fff;
+            border: none;
+            border-radius: 50%; /* Circular button */
+            width: 60px;
+            height: 60px;
+            font-size: 1.8rem; /* Icon size */
+            cursor: pointer;
+            margin: 1rem auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #play-pause-button:hover {
+            background-color: #8a6d5e;
+            transform: scale(1.1);
+        }
+        #play-pause-button.playing {
+            animation: pulseButton 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseButton {
+            0% { box-shadow: 0 0 0 0 rgba(160, 125, 110, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(160, 125, 110, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(160, 125, 110, 0); }
+        }
+
+        #lyrics-container {
+            margin-top: 1.5rem;
+            max-height: 200px; /* Limit height and make scrollable */
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.6); /* Slightly visible background */
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #555;
+            text-align: center; /* Center lyrics */
+             white-space: pre-line; /* Respect line breaks in lyrics */
+        }
+
+        /* Style for scrollbar (optional, Webkit browsers) */
+        #lyrics-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        #lyrics-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 3px;
+        }
+        #lyrics-container::-webkit-scrollbar-thumb {
+            background-color: #b58e7e;
+            border-radius: 3px;
+        }
+
         /* --- Animation Classes & Keyframes --- */
 
         /* Initial Hero Animations */
@@ -203,6 +283,7 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             h2 { font-size: 1.8rem; }
+            #music-section h2 { font-size: 1.6rem; }
             .container { padding: 1.5rem 1rem; }
             header.hero { min-height: 70vh; }
         }
@@ -212,7 +293,10 @@
             h1 { font-size: 2.2rem; }
              .hero h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
             h2 { font-size: 1.6rem; }
+            #music-section h2 { font-size: 1.4rem; }
             .cta-button { padding: 10px 20px; font-size: 0.9rem; }
+            #play-pause-button { width: 50px; height: 50px; font-size: 1.5rem; }
+            #lyrics-container { max-height: 150px; font-size: 0.9rem;}
         }
 
     </style>
@@ -222,85 +306,147 @@
     <!-- Hero Section -->
     <header class="hero">
         <div class="container">
-            {/* Diubah ke Bahasa Indonesia */}
             <p class="sub-title animate-on-scroll">Dengan rahmat Tuhan Yang Maha Esa & restu keluarga</p>
-            <h1 class="animate-on-scroll">Ardi & Irfan</h1> {/* Nama diubah */}
+            <!-- Updated Names -->
+            <h1 class="animate-on-scroll">Ardi & Diah</h1>
             <p class="sub-title animate-on-scroll">Mengundang Anda untuk merayakan pernikahan kami</p>
             <div class="divider animate-on-scroll"></div>
             <span class="heart-icon animate-on-scroll">❤</span>
         </div>
     </header>
 
+    <!-- Music Section -->
+    <section id="music-section">
+        <div class="container">
+            <h2>Lagu Spesial Kami</h2>
+            <p>Putar lagu yang mengiringi kisah kami.</p>
+            <!-- YouTube Player Container (Visually Hidden) -->
+            <div id="youtube-player-container">
+                 <div id="youtube-player"></div>
+            </div>
+            <!-- Play/Pause Button -->
+            <button id="play-pause-button" aria-label="Putar atau Jeda Musik">
+                ▶️ <!-- Play Icon -->
+            </button>
+            <!-- Lyrics Display -->
+            <div id="lyrics-container">
+                <!-- Static Lyrics - Replace if you find a timed version -->
+                <strong>Kamu Yang Kutunggu (feat. Afgan) - Rossa</strong>
+
+                Telah ku temukan yang aku impikan
+                Kamu yang sempurna
+                Segala kekurangan semua kelemahan
+                Kau jadikan cinta
+
+                Tanpamu ku tak bisa berjalan
+                Mencari cinta sejati tak ku temukan
+                Darimu aku bisa merasakan
+                Kasih sayang yang tulus dan bahagia
+
+                Kini ku merasa t'lah ku temukan
+                Dirimu yang selama ini ku nantikan
+                Kaulah jawaban segala risau hati
+                Yang membuatku tak bisa berpaling lagi
+
+                Ohh tanpamu ku tak bisa berjalan
+                Mencari cinta sejati tak ku temukan
+                Darimu aku bisa merasakan
+                Kasih sayang yang tulus dan bahagia
+
+                Kaulah cinta sejati
+                Yang mengisi hari-hariku
+                Takkan pernah terganti
+                Hanya dirimu yang satu
+                Dan ku ingin kau di sini
+                Temani ku selamanya
+
+                Tanpamu ku tak bisa berjalan
+                Mencari cinta sejati tak ku temukan
+                Darimu aku bisa merasakan (bisa kurasakan)
+                Kasih sayang yang tulus dan bahagia
+
+                (Tanpamu ku tak bisa berjalan) Tanpamu
+                (Mencari cinta sejati tak ku temukan) Tak ku temukan
+                (Darimu aku bisa merasakan)
+                Kasih sayang yang tulus dan bahagia
+
+                Kasih sayang yang tulus dan bahagia
+                Kamu yang ku tunggu
+            </div>
+        </div>
+    </section>
+
     <!-- Details Section -->
     <section id="details">
         <div class="container">
-             {/* Diubah ke Bahasa Indonesia */}
             <h2 class="animate-on-scroll">Perayaan Cinta</h2>
             <div class="divider animate-on-scroll"></div>
             <p class="animate-on-scroll">Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
             <h3 class="animate-on-scroll">Tanggal & Waktu</h3>
             <p class="animate-on-scroll">
-                <strong>[Sabtu], [25] [Desember] [2024]</strong><br> {/* Contoh Tanggal */}
-                Akad Nikah: Pukul [09:00] WIB <br>
-                Resepsi: Pukul [11:00] - [14:00] WIB {/* Contoh Waktu */}
+                <!-- Updated Date -->
+                <strong>Sabtu, 6 September 2099</strong><br>
+                Akad Nikah: Pukul 09:00 WIB <br>
+                Resepsi: Pukul 11:00 - 14:00 WIB
             </p>
             <h3 class="animate-on-scroll">Pakaian</h3>
-            <p class="animate-on-scroll">[Batik / Pakaian Formal Sopan] {/* Contoh Kode Pakaian */}</p>
+            <p class="animate-on-scroll">Batik / Pakaian Formal Sopan</p>
         </div>
     </section>
 
     <!-- Venue Section -->
     <section id="venue">
         <div class="container">
-             {/* Diubah ke Bahasa Indonesia */}
             <h2 class="animate-on-scroll">Lokasi Acara</h2>
             <div class="divider animate-on-scroll"></div>
-            <h3 class="animate-on-scroll">[Nama Gedung Pertemuan Indah]</h3> {/* Contoh Nama Tempat */}
+            <!-- Updated Venue Name -->
+            <h3 class="animate-on-scroll">Tokopedia Tower (Lantai 17)</h3>
             <p class="animate-on-scroll">
-                [Jalan Bahagia No. 123]<br> {/* Contoh Alamat */}
-                [Jakarta Selatan, DKI Jakarta, 12345] {/* Contoh Kota */}
+                <!-- Updated Venue Address -->
+                Ciputra World 2, Jl. Prof. DR. Satrio No.Kav. 11, RT.3/RW.3<br>
+                Karet Semanggi, Kota Jakarta Selatan, DKI Jakarta, 12950
             </p>
             <p class="animate-on-scroll">
-                {/* Ganti tautan ini dengan tautan Google Maps atau situs web venue Anda */}
-                <a href="[Tautan Google Maps ke Lokasi]" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
+                <!-- Placeholder Links - Update href with actual URLs -->
+                <a href="https://www.google.com/maps/search/?api=1&query=Tokopedia+Tower+Jakarta" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
                     Lihat Peta Lokasi
                 </a>
-                 | <a href="[Tautan Situs Web Venue jika ada]" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
+                 | <a href="#" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
                     Info Tempat
                 </a>
             </p>
-             <p class="animate-on-scroll">[Akad nikah dan resepsi akan dilaksanakan di lokasi yang sama]</p> {/* Contoh Detail Tambahan */}
+             <p class="animate-on-scroll">Akad nikah dan resepsi akan dilaksanakan di lokasi yang sama.</p>
         </div>
     </section>
 
     <!-- RSVP Section -->
     <section id="rsvp">
         <div class="container">
-             {/* Diubah ke Bahasa Indonesia */}
             <h2 class="animate-on-scroll">Konfirmasi Kehadiran (RSVP)</h2>
             <div class="divider animate-on-scroll"></div>
             <p class="animate-on-scroll">
                 Mohon konfirmasi kehadiran Anda sebelum tanggal
-                <strong>[10 Desember 2024]</strong> {/* Contoh Batas RSVP */}, agar kami dapat mempersiapkan acara dengan baik.
+                <!-- Updated RSVP Deadline -->
+                <strong>20 Agustus 2099</strong>,
+                agar kami dapat mempersiapkan acara dengan baik.
             </p>
             <p class="animate-on-scroll">
                 Kehadiran dan doa restu Anda adalah kebahagiaan bagi kami.
             </p>
-            {/* Ganti tautan ini dengan tautan formulir RSVP Anda (Google Form, dll.) */}
-            <a href="[Tautan ke Formulir RSVP Anda]" target="_blank" rel="noopener noreferrer" class="cta-button animate-on-scroll">
+            <!-- Placeholder Link - Update href with your actual RSVP form URL -->
+            <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button animate-on-scroll">
                 Konfirmasi Kehadiran Disini
             </a>
             <p class="animate-on-scroll" style="margin-top: 1rem; font-size: 0.9rem;">
-                {/* Ganti dengan info kontak Anda */}
-                Atau hubungi kami melalui WhatsApp di [Nomor Kontak Anda]
+                <!-- Randomized Dummy Contact -->
+                Atau hubungi kami melalui WhatsApp di 0812-3456-7890 (Ardi) / 0877-9876-5432 (Diah)
             </p>
         </div>
     </section>
 
-     <!-- Optional: Story or Registry/Gift Section -->
+     <!-- Optional: Gift Section -->
     <section id="extra">
         <div class="container">
-             {/* Diubah ke Bahasa Indonesia */}
              <h2 class="animate-on-scroll">Hadiah Pernikahan</h2>
              <div class="divider animate-on-scroll"></div>
              <p class="animate-on-scroll">
@@ -309,31 +455,33 @@
              <p class="animate-on-scroll">
                 Dan jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless melalui:
                 <br>
-                {/* Ganti dengan info rekening/e-wallet atau tautan jika ada */}
-                 <a href="[#]" target="_blank" rel="noopener noreferrer">[Nama Bank/E-Wallet 1 - No. Rek/ID]</a> a/n [Nama] |
-                 <a href="[#]" target="_blank" rel="noopener noreferrer">[Nama Bank/E-Wallet 2 - No. Rek/ID]</a> a/n [Nama]
+                <!-- Randomized Dummy Bank Info - Update href if linking digitally -->
+                 <a href="#" target="_blank" rel="noopener noreferrer">Bank Central Asia (BCA) - 1234567890</a> a/n Ardi Pratama |
+                 <a href="#" target="_blank" rel="noopener noreferrer">GoPay / OVO - 089988776655</a> a/n Diah Lestari
              </p>
         </div>
     </section>
 
     <footer>
         <div class="container" style="text-align: center; padding-top: 2rem; padding-bottom: 2rem; font-size: 0.9em; color: #888;">
-            {/* Diubah ke Bahasa Indonesia */}
-            <p>Hormat kami yang berbahagia,<br> Ardi & Irfan</p> {/* Nama diubah */}
+             <!-- Updated Names -->
+            <p>Hormat kami yang berbahagia,<br> Ardi & Diah</p>
             <span class="heart-icon" style="animation: none; opacity: 1; color: #ccc;">❤</span>
         </div>
     </footer>
 
+    <!-- YouTube IFrame Player API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
     <script>
-        // Simple Intersection Observer for scroll animations (Kode Javascript tidak perlu diubah)
+        // Simple Intersection Observer for scroll animations
         const animatedElements = document.querySelectorAll('.animate-on-scroll');
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    // Optional: unobserve after animation to save resources
-                    // observer.unobserve(entry.target);
+                    // observer.unobserve(entry.target); // Optional: uncomment to animate only once
                 }
                 // Optional: remove class if you want animation to repeat when scrolling back up
                 // else {
@@ -344,12 +492,34 @@
             threshold: 0.1 // Trigger when 10% of the element is visible
         });
 
-        // Observe each element
         animatedElements.forEach(el => {
             observer.observe(el);
         });
 
-    </script>
+        // YouTube Player Logic
+        let player;
+        const videoId = 'OSujOd9_fDg'; // Video ID for "Kamu Yang Kutunggu"
+        const playPauseButton = document.getElementById('play-pause-button');
+        let isPlaying = false;
 
-</body>
-    </html>
+        // This function gets called when the API is ready
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0', // Player is controlled programmatically, not shown
+                width: '0',
+                videoId: videoId,
+                playerVars: {
+                    'playsinline': 1, // Important for mobile playback
+                    'loop': 1,        // Loop the video
+                    'playlist': videoId // Required for loop to work with single video
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+            // Player is ready, but don't autoplay unless requested and permitted 
