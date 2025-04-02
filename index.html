@@ -11,8 +11,7 @@
 
     <!-- Preconnect for performance (optional but good) -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://www.youtube.com">
-    <link rel="preconnect" href="https://s.ytimg.com">
+    <!-- Removed YouTube preconnects as they are no longer needed -->
     <link rel="preconnect" href="https://google.com">
     <link rel="preconnect" href="https://www.google.com">
 
@@ -47,26 +46,21 @@
         }
 
         /* --- Animation Setup --- */
-
-        /* Scroll Animation: Initial State (Hidden) - Only applies if JS adds .js-enabled */
+        /* Only hide elements and set up transitions IF JavaScript adds the .js-enabled class */
         .js-enabled .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
-            /* Defines the transition effect when .is-visible is added */
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             will-change: opacity, transform; /* Performance hint */
         }
-        /* Scroll Animation: Visible State (triggered by JS adding this class) */
         .js-enabled .animate-on-scroll.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-        /* Scroll Animation: Stagger delays for elements within the same parent */
-        /* NOTE: Applies to the nth element *of its type* with the class */
+        /* Stagger delays */
         .js-enabled .animate-on-scroll:nth-of-type(2) { transition-delay: 0.1s; }
         .js-enabled .animate-on-scroll:nth-of-type(3) { transition-delay: 0.2s; }
         .js-enabled .animate-on-scroll:nth-of-type(4) { transition-delay: 0.3s; }
-        /* Reset delay counter for elements within each section */
         .js-enabled section .animate-on-scroll:nth-of-type(1) { transition-delay: 0s; }
         .js-enabled section .animate-on-scroll:nth-of-type(2) { transition-delay: 0.15s; }
         .js-enabled section .animate-on-scroll:nth-of-type(3) { transition-delay: 0.3s; }
@@ -76,7 +70,7 @@
         h1, h2, h3 {
             font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
             font-weight: normal;
-            color: #5a4a42; /* Soft brown */
+            color: #5a4a42;
             margin-bottom: 1rem;
         }
         h1 { font-size: clamp(2.2rem, 6vw, 3rem); line-height: 1.2; }
@@ -152,11 +146,9 @@
             margin: 0 0.5rem;
             transform-origin: center center;
         }
-        /* Heart Pulse Animation: Only runs if JS added .js-enabled */
         .js-enabled .heart-icon {
              animation: pulse 2s infinite ease-in-out alternate;
         }
-        /* Heart Pulse Animation: Keyframes */
         @keyframes pulse {
             from { transform: scale(1); opacity: 0.8; }
             to { transform: scale(1.15); opacity: 1; }
@@ -173,12 +165,10 @@
             font-weight: bold;
             font-size: clamp(0.9rem, 2.5vw, 1rem);
             margin-top: 1.5rem;
-            /* Button Animation: Transitions for hover/focus */
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             cursor: pointer;
         }
-        /* Button Animation: Hover/Focus state */
         .cta-button:hover, .cta-button:focus {
             background-color: #8a6d5e;
             color: #fff;
@@ -203,7 +193,6 @@
             will-change: transform;
             touch-action: none;
         }
-        /* Music Player Animation: Style when dragging (added by JS) */
         #floating-music-player.dragging {
              cursor: grabbing;
              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -221,13 +210,11 @@
             height: 40px;
             padding: 0;
             line-height: 1;
-            /* Player Button Animation: Transition for hover/active */
             transition: transform 0.2s ease;
             pointer-events: auto;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
-         /* Player Button Animation: Hover/Focus/Active states */
          #floating-play-pause:hover,
          #floating-play-pause:focus {
              transform: scale(1.1);
@@ -237,24 +224,14 @@
               transform: scale(0.95);
          }
 
-        /* Music Player Animation: Pulse when playing (JS adds .playing class) */
+        /* Music Player Pulse Animation */
         #floating-music-player.playing {
              animation: pulsePlayer 1.5s infinite ease-in-out;
         }
-        /* Music Player Pulse Animation: Keyframes */
         @keyframes pulsePlayer {
             0% { box-shadow: 0 0 0 0 rgba(160, 125, 110, 0.7), 0 5px 15px rgba(0, 0, 0, 0.2); }
             70% { box-shadow: 0 0 0 10px rgba(160, 125, 110, 0), 0 5px 15px rgba(0, 0, 0, 0.2); }
             100% { box-shadow: 0 0 0 0 rgba(160, 125, 110, 0), 0 5px 15px rgba(0, 0, 0, 0.2); }
-        }
-
-        /* Visually hidden container for the YT Player itself */
-        #youtube-player-container {
-            position: absolute;
-            width: 1px; height: 1px;
-            overflow: hidden;
-            clip: rect(0 0 0 0);
-            margin: -1px; padding: 0; border: 0;
         }
 
         /* --- Responsive Adjustments --- */
@@ -273,21 +250,20 @@
 
     </style>
     <!-- Minimal JS to add js-enabled class EARLY -->
-    <!-- This allows CSS targeting .js-enabled for animations -->
     <script>document.documentElement.classList.add('js-enabled');</script>
-     <!-- Changed to add class to <html> for slightly earlier potential application -->
 </head>
 <body>
 
     <!-- Hero Section -->
     <header class="hero">
         <div class="container">
-            <!-- Add .animate-on-scroll to elements you want animated -->
+            <!-- ** ACTION REQUIRED: Check Wording ** -->
             <p class="sub-title animate-on-scroll">Dengan rahmat Tuhan Yang Maha Esa & restu keluarga</p>
+            <!-- ** ACTION REQUIRED: Update Names ** -->
             <h1 class="animate-on-scroll">Ardi & Diah</h1>
+             <!-- ** ACTION REQUIRED: Check Wording ** -->
             <p class="sub-title animate-on-scroll">Mengundang Anda untuk merayakan pernikahan kami</p>
             <div class="divider animate-on-scroll"></div>
-            <!-- Heart icon animation is applied via CSS if .js-enabled is present -->
             <span class="heart-icon animate-on-scroll">❤</span>
         </div>
     </header>
@@ -297,13 +273,16 @@
         <div class="container">
             <h2 class="animate-on-scroll">Perayaan Cinta</h2>
             <div class="divider animate-on-scroll"></div>
+            <!-- ** ACTION REQUIRED: Check Wording ** -->
             <p class="animate-on-scroll">Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+             <!-- ** ACTION REQUIRED: Update Date & Times ** -->
             <h3 class="animate-on-scroll">Tanggal & Waktu</h3>
             <p class="animate-on-scroll">
                 <strong>Sabtu, 6 September 2035</strong><br>
                 Akad Nikah: Pukul 09:00 WIB <br>
                 Resepsi: Pukul 11:00 - 14:00 WIB
             </p>
+             <!-- ** ACTION REQUIRED: Update Dress Code ** -->
             <h3 class="animate-on-scroll">Pakaian</h3>
             <p class="animate-on-scroll">Batik / Pakaian Formal Sopan</p>
         </div>
@@ -314,16 +293,19 @@
         <div class="container">
             <h2 class="animate-on-scroll">Lokasi Acara</h2>
             <div class="divider animate-on-scroll"></div>
+            <!-- ** ACTION REQUIRED: Update Venue Name & Address ** -->
             <h3 class="animate-on-scroll">Tokopedia Tower (Lantai 17)</h3>
             <p class="animate-on-scroll">
                 Ciputra World 2, Jl. Prof. DR. Satrio No.Kav. 11, RT.3/RW.3<br>
                 Karet Semanggi, Kota Jakarta Selatan, DKI Jakarta, 12950
             </p>
             <p class="animate-on-scroll">
+                <!-- ** ACTION REQUIRED: Update Google Maps Link ** -->
                 <a href="https://www.google.com/maps/search/?api=1&query=Tokopedia+Tower+Jakarta" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
                     Lihat Peta Lokasi
                 </a>
                  |
+                 <!-- ** ACTION REQUIRED: Update Info Link (or remove) ** -->
                  <a href="#" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
                     Info Tempat
                 </a>
@@ -338,6 +320,7 @@
             <h2 class="animate-on-scroll">Konfirmasi Kehadiran (RSVP)</h2>
             <div class="divider animate-on-scroll"></div>
             <p class="animate-on-scroll">
+                <!-- ** ACTION REQUIRED: Update RSVP Deadline ** -->
                 Mohon konfirmasi kehadiran Anda sebelum tanggal
                 <strong>20 Agustus 2099</strong>,
                 agar kami dapat mempersiapkan acara dengan baik.
@@ -345,11 +328,12 @@
             <p class="animate-on-scroll">
                 Kehadiran dan doa restu Anda adalah kebahagiaan bagi kami.
             </p>
-             <!-- Button hover/focus animations are handled by CSS -->
+             <!-- ** ACTION REQUIRED: Update RSVP Link (e.g., Google Form, WhatsApp link) ** -->
             <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button animate-on-scroll">
                 Konfirmasi Kehadiran Disini
             </a>
             <p class="animate-on-scroll" style="margin-top: 1rem; font-size: 0.9em;">
+                <!-- ** ACTION REQUIRED: Update Contact Names & Numbers & Links -->
                 Atau hubungi kami melalui WhatsApp:<br>
                 <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">0812-3456-7890 (Ardiansyah)</a> /
                 <a href="https://wa.me/6287798765432" target="_blank" rel="noopener noreferrer">0877-9876-5432 (Diah)</a>
@@ -368,6 +352,7 @@
              <p class="animate-on-scroll">
                 Jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless melalui:
                 <br>
+                 <!-- ** ACTION REQUIRED: Update Bank/E-wallet Details & Links (or remove) ** -->
                  <a href="#" target="_blank" rel="noopener noreferrer">Bank Central Asia (BCA) - 1234567890</a> a/n Ardiansyah <br>
                  <a href="#" target="_blank" rel="noopener noreferrer">GoPay / OVO - 089988776655</a> a/n Diah
              </p>
@@ -376,27 +361,26 @@
 
     <footer>
         <div class="container" style="text-align: center; padding-top: 2rem; padding-bottom: 2rem; font-size: 0.9em; color: #888;">
+            <!-- ** ACTION REQUIRED: Update Footer Names ** -->
             <p>Hormat kami yang berbahagia,<br> Ardiansyah & Diah</p>
-            <!-- Footer heart does not pulse -->
             <span class="heart-icon" style="animation: none; opacity: 1; color: #ccc;">❤</span>
             <p style="font-size: 0.8em; margin-top: 1rem; color: #aaa;">Invitation crafted with love.</p>
         </div>
     </footer>
 
     <!-- Floating Music Player -->
-    <!-- Pulse animation added via CSS when .playing class is present -->
     <div id="floating-music-player" aria-label="Kontrol Musik">
-        <!-- Hover/active animation added via CSS -->
-        <button id="floating-play-pause" aria-label="Putar Musik">▶️</button> <!-- Play Icon -->
+        <button id="floating-play-pause" aria-label="Putar Musik" disabled>▶️</button> <!-- Start disabled -->
     </div>
 
-    <!-- YouTube Player Container (Visually Hidden) -->
-    <div id="youtube-player-container">
-         <div id="youtube-player"></div>
-    </div>
+    <!-- HTML5 Audio Player (Hidden) -->
+    <audio id="background-music" loop preload="metadata">
+        <!-- Assumes music.mp3 is in the SAME directory as index.html -->
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <!-- YouTube IFrame Player API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <!-- No YouTube API Script Needed -->
 
     <script>
         // Wait for the DOM to be fully loaded
@@ -404,165 +388,146 @@
 
             console.log("DOM Loaded. Initializing scripts.");
 
-             // --- Scroll Animations ---
-            // Check if IntersectionObserver is supported and JS added the class to <html>
+            // --- Scroll Animations (Logic remains the same) ---
             if ('IntersectionObserver' in window && document.documentElement.classList.contains('js-enabled')) {
                 const animatedElements = document.querySelectorAll('.animate-on-scroll');
-
                 if (animatedElements.length > 0) {
-                    // This observer watches elements with .animate-on-scroll
                     const observer = new IntersectionObserver((entries, observerInstance) => {
                         entries.forEach(entry => {
-                            // When an element becomes ~10% visible...
                             if (entry.isIntersecting) {
                                 console.log('Element intersecting, adding .is-visible:', entry.target);
-                                // Add the class that triggers the CSS transition
                                 entry.target.classList.add('is-visible');
-                                // Optional: Stop observing after it's animated once
-                                // observerInstance.unobserve(entry.target);
+                                // observerInstance.unobserve(entry.target); // Optional: Uncomment to animate only once
                             }
-                            // Optional: Remove class if it scrolls out of view (for re-animation)
-                            // else {
-                            //    entry.target.classList.remove('is-visible');
-                            //}
                         });
-                    }, {
-                        rootMargin: '0px', // default
-                        threshold: 0.1, // Trigger when 10% of the element is visible
-                     });
-
-                    // Start observing each element
+                    }, { threshold: 0.1 });
                     animatedElements.forEach(el => observer.observe(el));
                     console.log(`IntersectionObserver initialized. Observing ${animatedElements.length} elements.`);
                 } else {
                      console.warn("No elements with class 'animate-on-scroll' found.");
                 }
-
             } else {
-                // Fallback message if observer isn't supported or JS failed earlier
                 console.warn("IntersectionObserver not supported or JS disabled early. Scroll animations inactive.");
-                // Graceful Degradation: Elements will be visible by default if .js-enabled is missing
-                // or if the observer doesn't run, because the initial hidden state in CSS
-                // depends on .js-enabled being present.
             }
 
 
-            // --- YouTube Player Logic ---
-            let player;
-            const videoId = 'OSujOd9_fDg'; // ** ACTION REQUIRED: Update Video ID **
+            // --- HTML5 Audio Player Logic ---
+            const audioPlayer = document.getElementById('background-music');
             const floatingPlayerElement = document.getElementById('floating-music-player');
             const floatingPlayPauseButton = document.getElementById('floating-play-pause');
-            let isPlaying = false;
+            let isAudioPlaying = false; // Track audio state
 
-            window.onYouTubeIframeAPIReady = function() {
-                console.log("YouTube API Ready. Initializing player...");
-                if (!document.getElementById('youtube-player')) {
-                     console.error("YouTube player placeholder div (#youtube-player) not found!");
-                     handlePlayerInitializationError();
-                     return;
-                }
-                try {
-                    player = new YT.Player('youtube-player', {
-                        height: '1', width: '1', videoId: videoId,
-                        playerVars: { 'playsinline': 1, 'loop': 1, 'playlist': videoId, 'controls': 0, 'showinfo': 0, 'modestbranding': 1, 'origin': window.location.origin },
-                        events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': onPlayerError }
-                    });
-                } catch (error) {
-                    console.error("Error creating YouTube player instance:", error);
-                    handlePlayerInitializationError();
-                }
-            };
+            // Check if necessary elements exist
+            if (audioPlayer && floatingPlayerElement && floatingPlayPauseButton) {
+                 console.log("Audio player elements found.");
 
-            function onPlayerReady(event) {
-                console.log("Player Ready. State:", event.target.getPlayerState());
-                if(floatingPlayPauseButton) floatingPlayPauseButton.disabled = false;
-                if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
-            }
+                 // Enable the button once the audio metadata is loaded (safer)
+                 audioPlayer.addEventListener('loadedmetadata', () => {
+                     console.log("Audio metadata loaded. Enabling button.");
+                     floatingPlayPauseButton.disabled = false;
+                 });
+                 // Fallback if loadedmetadata doesn't fire reliably in all cases
+                 // setTimeout(() => {
+                 //     if (floatingPlayPauseButton.disabled) {
+                 //        console.log("Timeout: Enabling button as fallback.");
+                 //         floatingPlayPauseButton.disabled = false;
+                 //     }
+                 // }, 1500); // Enable after 1.5s anyway
 
-            function onPlayerStateChange(event) {
-                const newState = event.data;
-                console.log("Player State Changed:", newState);
 
-                // Check if the player is now playing
-                if (newState == YT.PlayerState.PLAYING) {
-                    if (!isPlaying) {
-                         console.log("Callback: State changed to PLAYING");
-                         isPlaying = true;
-                         if(floatingPlayPauseButton) floatingPlayPauseButton.innerHTML = '⏸️';
-                         // Add .playing class to trigger the CSS pulse animation
-                         if(floatingPlayerElement) floatingPlayerElement.classList.add('playing');
-                         if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', 'Jeda Musik');
-                    }
-                } else { // Player is not playing (paused, ended, buffering, etc.)
-                     if (isPlaying) {
-                         console.log("Callback: State changed to NOT PLAYING (State: " + newState + ")");
-                         isPlaying = false;
-                         if(floatingPlayPauseButton) floatingPlayPauseButton.innerHTML = '▶️';
-                         // Remove .playing class to stop the CSS pulse animation
-                         if(floatingPlayerElement) floatingPlayerElement.classList.remove('playing');
-                         if ([YT.PlayerState.PAUSED, YT.PlayerState.ENDED, YT.PlayerState.CUED, -1].includes(newState)) {
-                            if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
-                         }
-                    }
-                }
-            }
-
-            function onPlayerError(event) {
-                console.error("YouTube Player Error Code:", event.data);
-                let errorMessage = 'Musik Error ' + event.data;
-                if(floatingPlayPauseButton) floatingPlayPauseButton.innerHTML = '⚠️';
-                if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', errorMessage);
-                if(floatingPlayerElement) floatingPlayerElement.classList.remove('playing'); // Ensure pulse stops
-                if(floatingPlayPauseButton) floatingPlayPauseButton.disabled = true;
-                isPlaying = false;
-            }
-
-            function handlePlayerInitializationError() {
-                 console.error("Could not initialize YouTube Player correctly.");
-                 if(floatingPlayPauseButton) floatingPlayPauseButton.innerHTML = '⚠️';
-                 if(floatingPlayPauseButton) floatingPlayPauseButton.setAttribute('aria-label', 'Gagal Memuat Musik');
-                 if(floatingPlayerElement) floatingPlayerElement.classList.remove('playing');
-                 if(floatingPlayPauseButton) floatingPlayPauseButton.disabled = true;
-                 isPlaying = false;
-            }
-
-            // --- Button Click to Play/Pause ---
-             if (floatingPlayPauseButton) {
+                // --- Button Click to Play/Pause ---
                 floatingPlayPauseButton.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (player && typeof player.playVideo === 'function' && typeof player.pauseVideo === 'function') {
-                         const currentState = player.getPlayerState();
-                         console.log("Button Click: Current player state is", currentState);
-                         if (currentState === YT.PlayerState.PLAYING) {
-                            console.log("Button Click: Pausing video.");
-                            player.pauseVideo();
-                         } else {
-                             console.log("Button Click: Playing video.");
-                             player.playVideo();
-                         }
-                    } else {
-                        console.warn("Play/Pause Click: Player not ready or API methods unavailable.");
-                        if (!player && typeof window.onYouTubeIframeAPIReady === 'function') {
-                            console.log("Attempting YT Player re-initialization...");
-                            window.onYouTubeIframeAPIReady(); // Try to re-init
+                    e.stopPropagation(); // Prevent click from starting drag
+
+                    if (audioPlayer.paused || audioPlayer.ended) {
+                         // Play returns a Promise - handle potential errors
+                        const playPromise = audioPlayer.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                console.log("Audio Playing via button");
+                                // State update handled by 'playing' event listener
+                            }).catch(error => {
+                                console.error("Audio Playback Error:", error);
+                                isAudioPlaying = false; // Ensure state is correct
+                                floatingPlayPauseButton.innerHTML = '▶️';
+                                floatingPlayerElement.classList.remove('playing');
+                                floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik Gagal');
+                                floatingPlayPauseButton.innerHTML = '⚠️'; // Error icon
+                                // Keep button enabled to allow retry? Or disable: floatingPlayPauseButton.disabled = true;
+                            });
+                        } else {
+                            // Fallback for browsers not returning a promise (older)
+                            try {
+                                audioPlayer.play();
+                                console.log("Audio Playing via button (no promise)");
+                            } catch (error) {
+                                 console.error("Audio Playback Error (no promise):", error);
+                                 isAudioPlaying = false;
+                                 floatingPlayPauseButton.innerHTML = '⚠️';
+                            }
                         }
+                    } else {
+                        audioPlayer.pause();
+                        console.log("Audio Paused via button");
+                         // State update handled by 'pause' event listener
                     }
                 });
+
+                // --- Update Button UI based on Audio Events ---
+                audioPlayer.addEventListener('playing', () => {
+                    console.log("Audio Event: playing");
+                    isAudioPlaying = true;
+                    floatingPlayPauseButton.innerHTML = '⏸️'; // Pause Icon
+                    floatingPlayerElement.classList.add('playing'); // Add pulse animation
+                    floatingPlayPauseButton.setAttribute('aria-label', 'Jeda Musik');
+                });
+
+                audioPlayer.addEventListener('pause', () => {
+                    console.log("Audio Event: pause");
+                    isAudioPlaying = false;
+                    floatingPlayPauseButton.innerHTML = '▶️'; // Play Icon
+                    floatingPlayerElement.classList.remove('playing'); // Remove pulse
+                    floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
+                });
+
+                // Handle end of track if not looping (though 'loop' attribute is set)
+                audioPlayer.addEventListener('ended', () => {
+                    console.log("Audio Event: ended");
+                    isAudioPlaying = false;
+                    floatingPlayPauseButton.innerHTML = '▶️';
+                    floatingPlayerElement.classList.remove('playing');
+                     // Because loop is enabled, it should restart automatically.
+                     // If loop wasn't set, the state would stay paused here.
+                });
+
+                // Handle potential loading/playback errors
+                audioPlayer.addEventListener('error', (e) => {
+                     console.error("HTML5 Audio Error Event:", audioPlayer.error);
+                     isAudioPlaying = false;
+                     floatingPlayPauseButton.innerHTML = '⚠️'; // Error icon
+                     floatingPlayPauseButton.setAttribute('aria-label', 'Musik Error');
+                     floatingPlayerElement.classList.remove('playing');
+                     floatingPlayPauseButton.disabled = true; // Disable button on error
+                });
+
             } else {
-                 console.error("Floating play/pause button not found!");
+                 console.error("Required audio player elements not found! Check IDs: background-music, floating-music-player, floating-play-pause");
+                 // Attempt to disable button if found but others missing
+                 if(floatingPlayPauseButton) floatingPlayPauseButton.disabled = true;
             }
 
-            // --- Draggable Music Player Logic ---
+
+            // --- Draggable Music Player Logic (Logic remains the same) ---
             if (floatingPlayerElement) {
                 let isDragging = false;
                 let startX, startY, initialX, initialY;
 
                 function dragStart(e) {
-                    if (e.target === floatingPlayPauseButton || floatingPlayPauseButton.disabled) return;
+                    if (e.target === floatingPlayPauseButton || (floatingPlayPauseButton && floatingPlayPauseButton.disabled)) return;
+
                     isDragging = true;
-                    // Add .dragging class for CSS styles
                     floatingPlayerElement.classList.add('dragging');
-                    floatingPlayerElement.style.transition = 'none'; // Disable transition during drag
+                    floatingPlayerElement.style.transition = 'none';
 
                     const style = window.getComputedStyle(floatingPlayerElement);
                     const matrix = new DOMMatrixReadOnly(style.transform);
@@ -576,7 +541,7 @@
                     } else if (e.type === 'touchstart') {
                         const touch = e.touches[0];
                         startX = touch.clientX; startY = touch.clientY;
-                        document.addEventListener('touchmove', dragMove, { passive: false }); // Need passive:false to call preventDefault
+                        document.addEventListener('touchmove', dragMove, { passive: false });
                         document.addEventListener('touchend', dragEnd);
                         document.addEventListener('touchcancel', dragEnd);
                     }
@@ -585,8 +550,7 @@
 
                 function dragMove(e) {
                     if (!isDragging) return;
-                    // Prevent page scroll while dragging element on touch devices
-                    if (e.cancelable) e.preventDefault();
+                    if(e.cancelable) e.preventDefault();
 
                     let currentX, currentY;
                     if (e.type === 'mousemove') {
@@ -601,7 +565,6 @@
                     let newX = initialX + dx;
                     let newY = initialY + dy;
 
-                    // Simple Boundary checks
                     const parentWidth = window.innerWidth;
                     const parentHeight = window.innerHeight;
                     const elemWidth = floatingPlayerElement.offsetWidth;
@@ -615,9 +578,8 @@
                 function dragEnd(e) {
                     if (!isDragging) return;
                     isDragging = false;
-                     // Remove .dragging class
                     floatingPlayerElement.classList.remove('dragging');
-                    floatingPlayerElement.style.transition = ''; // Re-enable transitions
+                    floatingPlayerElement.style.transition = '';
 
                     if (e.type === 'mouseup' || e.type === 'mousemove') {
                         document.removeEventListener('mousemove', dragMove);
@@ -631,20 +593,11 @@
                 }
 
                 floatingPlayerElement.addEventListener('mousedown', dragStart);
-                floatingPlayerElement.addEventListener('touchstart', dragStart, { passive: true }); // passive:true is okay for start
+                floatingPlayerElement.addEventListener('touchstart', dragStart, { passive: true });
 
             } else {
                  console.error("Draggable player element (#floating-music-player) not found!");
             }
-
-             // --- Initial setup checks ---
-             if (!floatingPlayerElement || !floatingPlayPauseButton) {
-                 console.error("Floating player elements could not be found!");
-             } else {
-                  // Disable button until YT player is ready
-                  floatingPlayPauseButton.disabled = true;
-                  console.log("Floating player elements found and initialized.");
-             }
 
         }); // End DOMContentLoaded listener
     </script>
