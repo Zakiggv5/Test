@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Removed unused preconnects -->
 
     <style>
         /* --- CSS Variables --- */
@@ -30,6 +29,9 @@
             --color-white: #ffffff;
             --color-shadow: rgba(90, 74, 66, 0.1); /* Shadow based on text color */
 
+            /* ADJUSTED: Make pattern slightly more visible */
+            --color-pattern-line: rgba(181, 142, 126, 0.18); /* Was 0.1 */
+
             --shadow-soft: 0 4px 12px var(--color-shadow);
             --shadow-medium: 0 6px 18px var(--color-shadow);
         }
@@ -43,21 +45,35 @@
 
         html {
             scroll-behavior: smooth;
-            font-size: 100%; /* Base font size */
-            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+            font-size: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: var(--font-primary);
-            line-height: 1.7; /* Slightly more spacing */
+            line-height: 1.7;
             color: var(--color-text-body);
+
+            /* === Programmatic Background Pattern === */
             background-color: var(--color-background);
-            /* Subtle background texture */
-             background-image:
-                radial-gradient(rgba(190, 170, 180, 0.05) 0.5px, transparent 0.5px),
-                radial-gradient(circle at top left, rgba(210, 190, 200, 0.1), transparent 50%),
-                radial-gradient(circle at bottom right, rgba(181, 142, 126, 0.1), transparent 60%);
-            background-size: 5px 5px, 100% 100%, 100% 100%;
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    var(--color-pattern-line) 0,
+                    var(--color-pattern-line) 1px,
+                    transparent 1px,
+                    transparent 25px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    var(--color-pattern-line) 0,
+                    var(--color-pattern-line) 1px,
+                    transparent 1px,
+                    transparent 25px
+                );
+            background-size: 25px 25px;
+
+            /* --- Other body styles --- */
             overflow-x: hidden;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
@@ -67,19 +83,17 @@
         /* --- Animation Setup --- */
         .js-enabled .animate-on-scroll {
             opacity: 0;
-            transform: translateY(35px); /* Slightly increased distance */
-            transition: opacity 0.9s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1); /* Smoother easing */
+            transform: translateY(35px);
+            transition: opacity 0.9s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
             will-change: opacity, transform;
         }
         .js-enabled .animate-on-scroll.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-        /* Stagger delays (simplified slightly) */
         .js-enabled .animate-on-scroll:nth-of-type(2) { transition-delay: 0.1s; }
         .js-enabled .animate-on-scroll:nth-of-type(3) { transition-delay: 0.2s; }
         .js-enabled .animate-on-scroll:nth-of-type(4) { transition-delay: 0.3s; }
-        /* Keep section stagger separate if needed */
         .js-enabled section .animate-on-scroll:nth-of-type(1) { transition-delay: 0s; }
         .js-enabled section .animate-on-scroll:nth-of-type(2) { transition-delay: 0.15s; }
         .js-enabled section .animate-on-scroll:nth-of-type(3) { transition-delay: 0.3s; }
@@ -89,24 +103,23 @@
         /* --- Typography --- */
         h1, h2, h3 {
             font-family: var(--font-headings);
-            font-weight: 400; /* Regular weight for Playfair */
+            font-weight: 400;
             color: var(--color-text-headings);
             margin-bottom: 1rem;
             line-height: 1.3;
         }
-        /* Specific heading styles */
-        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 0.5rem; } /* Made script bigger */
+        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 0.5rem; }
         h2 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin-top: 3rem; text-align: center; color: var(--color-accent-secondary); font-weight: 500; }
         h3 { font-size: clamp(1.2rem, 4vw, 1.6rem); margin-top: 2.5rem; font-weight: 500; color: var(--color-text-headings); }
 
         p {
             margin-bottom: 1.2rem;
-            font-size: clamp(0.95rem, 2.5vw, 1.05rem); /* Slightly larger base */
-            font-weight: 300; /* Lighter Lato weight */
+            font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+            font-weight: 300;
             color: var(--color-text-body);
         }
         p strong {
-            font-weight: 700; /* Bold Lato weight */
+            font-weight: 700;
              color: var(--color-text-headings);
         }
 
@@ -127,14 +140,30 @@
 
         /* --- Layout & Containers --- */
         .container {
-            max-width: 750px; /* Slightly narrower for better line length */
+            max-width: 750px;
             margin: 0 auto;
-            padding: 3rem 1.5rem; /* Increased padding */
-            overflow: hidden; /* Prevent horizontal scroll */
+            padding: 3rem 1.5rem;
+            overflow: hidden;
+            /* ADJUSTED: Make container overlay slightly more transparent */
+            background-color: rgba(254, 251, 249, 0.5); /* Was 0.6 */
+            box-shadow: 0 0 30px rgba(181, 142, 126, 0.05);
+            border-radius: 4px;
+            margin-bottom: 2rem;
         }
+         header.hero .container {
+            background-color: transparent;
+            box-shadow: none;
+            border-radius: 0;
+            margin-bottom: 0;
+            padding: 0 1.5rem;
+         }
+         footer .container {
+             margin-bottom: 0;
+         }
+
 
         header.hero {
-            min-height: 95vh; /* Slightly taller */
+            min-height: 95vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -142,15 +171,13 @@
             text-align: center;
             padding: 3rem 1rem;
             position: relative;
-            background: linear-gradient(rgba(254, 251, 249, 0.1), rgba(254, 251, 249, 0.8)),
-                        radial-gradient(ellipse at bottom, var(--color-accent-soft) -20%, transparent 60%);
-            border-bottom: 1px solid var(--color-accent-soft);
+             margin-bottom: 2rem;
         }
         .hero .names {
             font-family: var(--font-script);
             color: var(--color-accent-secondary);
             margin-bottom: 0.75rem;
-            font-size: clamp(3.5rem, 12vw, 6rem); /* Larger script */
+            font-size: clamp(3.5rem, 12vw, 6rem);
             line-height: 1;
         }
         .hero .sub-title {
@@ -158,11 +185,11 @@
             color: var(--color-text-subtle);
             font-weight: 300;
             margin-top: 0.5rem;
-            max-width: 500px; /* Constrain width */
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
-        .hero .date-highlight { /* Style the date differently if needed */
+        .hero .date-highlight {
             display: block;
             margin-top: 1rem;
             font-family: var(--font-headings);
@@ -172,30 +199,26 @@
 
         /* --- Sections --- */
         section {
-            padding: 4rem 0; /* Increased vertical spacing */
+            padding: 0;
             text-align: center;
-            position: relative; /* For potential pseudo-elements */
-            /* Removed bottom border for softer separation */
+            position: relative;
         }
-        /* Add subtle alternating background hint if desired */
-        /* section:nth-of-type(odd) { background-color: rgba(217, 197, 187, 0.03); } */
 
         /* --- Decorative Elements --- */
         .divider {
-            width: 120px; /* Wider */
-            height: auto; /* Height determined by SVG */
+            width: 120px;
+            height: auto;
             margin: 2rem auto;
-            color: var(--color-accent-soft); /* Color for the SVG */
+            color: var(--color-accent-soft);
         }
-        .heart-icon { /* Less prominent now, maybe remove if divider is enough */
+        .heart-icon {
             display: inline-block;
-            color: #d9a99a; /* Keep original heart color for now */
+            color: #d9a99a;
             font-size: 1.3rem;
-            margin: 0.5rem 0.5rem 0; /* Adjust position */
+            margin: 0.5rem 0.5rem 0;
             opacity: 0.7;
         }
         .js-enabled .heart-icon {
-            /* Keep pulse or remove if too much */
              animation: pulse 2.5s infinite ease-in-out alternate;
         }
         @keyframes pulse {
@@ -208,31 +231,30 @@
             display: inline-block;
             background-color: var(--color-accent-primary);
             color: var(--color-white);
-            padding: 14px 30px; /* Slightly larger */
-            border-radius: 30px; /* More rounded */
+            padding: 14px 30px;
+            border-radius: 30px;
             text-decoration: none;
-            font-family: var(--font-primary); /* Use body font */
+            font-family: var(--font-primary);
             font-weight: 700;
             font-size: clamp(0.9rem, 2.5vw, 1rem);
             margin-top: 2rem;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: var(--shadow-soft);
             cursor: pointer;
-            border: none; /* Remove default border */
+            border: none;
         }
         .cta-button:hover, .cta-button:focus {
             background-color: var(--color-accent-secondary);
             color: var(--color-white);
             text-decoration: none;
-            transform: translateY(-3px); /* More lift */
+            transform: translateY(-3px);
             box-shadow: var(--shadow-medium);
-            outline: none; /* Remove focus outline */
+            outline: none;
         }
          .cta-button:active {
              transform: translateY(-1px);
              box-shadow: var(--shadow-soft);
          }
-
 
         /* --- Floating Music Player Styling --- */
         #floating-music-player {
@@ -240,9 +262,9 @@
             bottom: 25px;
             right: 25px;
             z-index: 1000;
-            background-color: rgba(160, 125, 110, 0.85); /* Slightly more transparent */
+            background-color: rgba(160, 125, 110, 0.85);
             border-radius: 50%;
-            width: 55px; /* Fixed size */
+            width: 55px;
             height: 55px;
             box-shadow: var(--shadow-medium);
             cursor: grab;
@@ -250,13 +272,13 @@
             transform: translate3d(0, 0, 0);
             will-change: transform, box-shadow;
             touch-action: none;
-            display: flex; /* Center the button */
+            display: flex;
             justify-content: center;
             align-items: center;
         }
         #floating-music-player.dragging {
              cursor: grabbing;
-             box-shadow: 0 10px 25px rgba(90, 74, 66, 0.25); /* Darker shadow when dragging */
+             box-shadow: 0 10px 25px rgba(90, 74, 66, 0.25);
              background-color: rgba(160, 125, 110, 0.95);
         }
         #floating-play-pause {
@@ -264,14 +286,14 @@
             border: none;
             color: var(--color-white);
             cursor: pointer;
-            width: 24px; /* Size of the icon */
+            width: 24px;
             height: 24px;
             padding: 0;
             line-height: 1;
             transition: transform 0.2s ease, opacity 0.3s ease;
             pointer-events: auto;
             user-select: none;
-            display: flex; /* Ensure icon is centered if using SVG */
+            display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0.85;
@@ -289,50 +311,52 @@
          #floating-play-pause svg {
              width: 100%;
              height: 100%;
-             fill: currentColor; /* SVG inherits color */
-             display: block; /* Remove extra space */
+             fill: currentColor;
+             display: block;
          }
-
-         /* Icons (Inline SVG preferred over emoji for consistency) */
-         .icon-play { /* Initially hidden */ display: none; }
-         .icon-pause { /* Initially shown if expected to autoplay or play first */ }
+         /* Icons State Management */
+         #floating-music-player .icon-play,
+         #floating-music-player .icon-pause,
+         #floating-music-player .icon-error { display: none; }
          #floating-music-player.paused .icon-play { display: block; }
-         #floating-music-player.paused .icon-pause { display: none; }
-         #floating-music-player.playing .icon-play { display: none; }
          #floating-music-player.playing .icon-pause { display: block; }
-         #floating-music-player.error .icon-play,
-         #floating-music-player.error .icon-pause { display: none; }
          #floating-music-player.error .icon-error { display: block; }
-         .icon-error { display: none; } /* Hidden by default */
+         #floating-music-player:not(.playing):not(.paused):not(.error) .icon-play { display: block; }
 
 
-        /* Music Player Pulse Animation (Refined) */
+        /* Music Player Pulse Animation */
         #floating-music-player.playing {
              animation: pulsePlayer 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
         }
         @keyframes pulsePlayer {
-            0% { box-shadow: 0 0 0 0 rgba(181, 142, 126, 0.5), var(--shadow-medium); } /* Start with base shadow */
-            70% { box-shadow: 0 0 0 12px rgba(181, 142, 126, 0), var(--shadow-medium); } /* Expand transparent pulse */
-            100% { box-shadow: 0 0 0 0 rgba(181, 142, 126, 0), var(--shadow-medium); } /* Fade pulse out */
+            0% { box-shadow: 0 0 0 0 rgba(181, 142, 126, 0.5), var(--shadow-medium); }
+            70% { box-shadow: 0 0 0 12px rgba(181, 142, 126, 0), var(--shadow-medium); }
+            100% { box-shadow: 0 0 0 0 rgba(181, 142, 126, 0), var(--shadow-medium); }
         }
 
         /* --- Footer --- */
         footer {
-            padding: 3rem 1rem;
+            padding: 0;
             text-align: center;
-            font-size: 0.9em;
-            color: var(--color-text-subtle);
-            border-top: 1px solid var(--color-accent-soft);
-            margin-top: 3rem; /* Ensure space before footer */
+            margin-top: 3rem;
         }
+         footer .container {
+             padding-top: 3rem;
+             padding-bottom: 3rem;
+             border-top: 1px solid var(--color-accent-soft);
+             background-color: transparent; /* Keep footer clear */
+             box-shadow: none;
+             border-radius: 0;
+         }
         footer p {
             margin-bottom: 0.5rem;
             line-height: 1.5;
             font-weight: 400;
+            color: var(--color-text-subtle);
         }
         footer .heart-icon {
             font-size: 1rem;
-             animation: none; /* No animation in footer */
+             animation: none;
              opacity: 0.5;
              margin-top: 0.5rem;
              margin-bottom: 0.5rem;
@@ -348,27 +372,27 @@
 
         /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
-            .container { padding: 2rem 1rem; }
-            header.hero { min-height: 85vh; }
+            .container { padding: 2rem 1rem; margin-bottom: 1.5rem; }
+            header.hero { min-height: 85vh; margin-bottom: 1.5rem; }
             h1 { font-size: clamp(2.2rem, 7vw, 3.5rem); }
             h2 { font-size: clamp(1.6rem, 4.5vw, 2rem); }
             h3 { font-size: clamp(1.1rem, 3.5vw, 1.4rem); }
             #floating-music-player { bottom: 20px; right: 20px; width: 50px; height: 50px; }
             #floating-play-pause { width: 20px; height: 20px; }
-            section { padding: 3rem 0; }
         }
 
         @media (max-width: 480px) {
-            body { line-height: 1.6; } /* Adjust line height slightly for small screens */
-            .container { padding: 1.5rem 1rem; }
-            header.hero { min-height: 80vh; padding: 2rem 0.5rem; }
+            body { line-height: 1.6; }
+            .container { padding: 1.5rem 1rem; margin-bottom: 1rem;}
+            header.hero { min-height: 80vh; padding: 2rem 0.5rem; margin-bottom: 1rem; }
+            header.hero .container { padding: 0 1rem; }
              .hero .names { font-size: clamp(3rem, 10vw, 4.5rem); }
             p { font-size: clamp(0.9rem, 2.8vw, 1rem); }
             .cta-button { padding: 12px 25px; margin-top: 1.5rem; }
             #floating-music-player { bottom: 15px; right: 15px; width: 45px; height: 45px; }
             #floating-play-pause { width: 18px; height: 18px; }
-            section { padding: 2.5rem 0; }
-            footer { padding: 2rem 1rem; margin-top: 2rem;}
+            footer { margin-top: 2rem;}
+            footer .container { padding-top: 2rem; padding-bottom: 2rem;}
         }
 
     </style>
@@ -380,17 +404,11 @@
     <!-- Hero Section -->
     <header class="hero">
         <div class="container">
-            <!-- ** ACTION REQUIRED: Check Wording ** -->
             <p class="sub-title animate-on-scroll">Dengan rahmat Tuhan Yang Maha Esa, kami mengundang Anda untuk merayakan:</p>
-            <!-- ** ACTION REQUIRED: Update Names ** -->
             <h1 class="names animate-on-scroll">Ardi & Diah</h1>
-             <!-- ** ACTION REQUIRED: Check Wording ** -->
             <p class="sub-title animate-on-scroll">pada hari pernikahan kami</p>
-            <!-- ** ACTION REQUIRED: Update Date (Optional highlight) ** -->
             <p class="date-highlight animate-on-scroll">Sabtu, 6 September 2035</p>
-             <!-- Decorative Divider SVG -->
              <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
-            <!-- <span class="heart-icon animate-on-scroll">❤</span> Optional: Keep if you like -->
         </div>
     </header>
 
@@ -398,18 +416,14 @@
     <section id="details">
         <div class="container">
             <h2 class="animate-on-scroll">Perayaan Cinta</h2>
-            <!-- Decorative Divider SVG -->
             <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
-            <!-- ** ACTION REQUIRED: Check Wording ** -->
             <p class="animate-on-scroll">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu pada hari istimewa kami.</p>
-             <!-- ** ACTION REQUIRED: Update Date & Times ** -->
             <h3 class="animate-on-scroll">Waktu Acara</h3>
             <p class="animate-on-scroll">
                 <strong>Sabtu, 6 September 2035</strong><br>
                 Akad Nikah: Pukul 09:00 WIB <br>
                 Resepsi: Pukul 11:00 - 14:00 WIB
             </p>
-             <!-- ** ACTION REQUIRED: Update Dress Code ** -->
             <h3 class="animate-on-scroll">Pakaian</h3>
             <p class="animate-on-scroll">Batik / Pakaian Formal Sopan</p>
         </div>
@@ -420,18 +434,15 @@
         <div class="container">
             <h2 class="animate-on-scroll">Lokasi Acara</h2>
             <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
-            <!-- ** ACTION REQUIRED: Update Venue Name & Address ** -->
             <h3 class="animate-on-scroll">Tokopedia Tower (Lantai 17)</h3>
             <p class="animate-on-scroll">
                 Ciputra World 2, Jl. Prof. DR. Satrio No.Kav. 11, RT.3/RW.3<br>
                 Karet Semanggi, Kota Jakarta Selatan, DKI Jakarta, 12950
             </p>
             <p class="animate-on-scroll">
-                <!-- ** ACTION REQUIRED: Update Google Maps Link ** -->
                 <a href="https://www.google.com/maps/search/?api=1&query=Tokopedia+Tower+Jakarta" target="_blank" rel="noopener noreferrer" class="animate-on-scroll">
                     Lihat Peta Lokasi
                 </a>
-                 <!-- Removed second link for simplicity, or update if needed -->
             </p>
              <p class="animate-on-scroll">Akad nikah dan resepsi akan dilaksanakan di lokasi yang sama.</p>
         </div>
@@ -443,20 +454,17 @@
             <h2 class="animate-on-scroll">Konfirmasi Kehadiran</h2>
              <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
             <p class="animate-on-scroll">
-                <!-- ** ACTION REQUIRED: Update RSVP Deadline ** -->
                 Mohon konfirmasi kehadiran Anda sebelum tanggal
-                <strong>20 Agustus 2035</strong> <!-- Updated Year -->
+                <strong>20 Agustus 2035</strong>
                 agar kami dapat mempersiapkan segalanya dengan baik.
             </p>
             <p class="animate-on-scroll">
                 Kehadiran dan doa restu Anda adalah anugerah terindah bagi kami.
             </p>
-             <!-- ** ACTION REQUIRED: Update RSVP Link (e.g., Google Form, WhatsApp link) ** -->
             <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button animate-on-scroll">
                 Konfirmasi Kehadiran Disini
             </a>
             <p class="animate-on-scroll" style="margin-top: 1.5rem; font-size: 0.9em;">
-                <!-- ** ACTION REQUIRED: Update Contact Names & Numbers & Links -->
                 Atau hubungi kami melalui WhatsApp:<br>
                 <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">0812-3456-7890 (Ardi)</a><br>
                 <a href="https://wa.me/6287798765432" target="_blank" rel="noopener noreferrer">0877-9876-5432 (Diah)</a>
@@ -465,9 +473,9 @@
     </section>
 
      <!-- Optional: Gift Section -->
-    <section id="gifts"> <!-- Changed ID slightly -->
+    <section id="gifts">
         <div class="container">
-             <h2 class="animate-on-scroll">Ungkapan Kasih</h2> <!-- Changed title slightly -->
+             <h2 class="animate-on-scroll">Ungkapan Kasih</h2>
              <svg class="divider animate-on-scroll" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q 25,-2 50,5 T 100,5" stroke="currentColor" fill="transparent" stroke-width="1"/></svg>
              <p class="animate-on-scroll">
                 Doa restu Anda merupakan karunia yang tak ternilai bagi kami.
@@ -475,7 +483,6 @@
              <p class="animate-on-scroll">
                 Namun jika memberi adalah ungkapan tanda kasih, Anda dapat mengirimkannya secara cashless melalui:
                 <br>
-                 <!-- ** ACTION REQUIRED: Update Bank/E-wallet Details & Links (or remove) ** -->
                  <a href="#" target="_blank" rel="noopener noreferrer">Bank Central Asia (BCA) - 1234567890</a> a/n Ardiansyah <br>
                  <a href="#" target="_blank" rel="noopener noreferrer">GoPay / OVO - 089988776655</a> a/n Diah
              </p>
@@ -486,8 +493,7 @@
     </section>
 
     <footer>
-        <div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
-            <!-- ** ACTION REQUIRED: Update Footer Names ** -->
+        <div class="container">
             <p>Hormat kami yang berbahagia,<br> Ardiansyah & Diah</p>
             <span class="heart-icon">❤</span>
             <p class="crafted">Invitation crafted with love.</p>
@@ -495,9 +501,8 @@
     </footer>
 
     <!-- Floating Music Player -->
-    <div id="floating-music-player" class="paused" aria-label="Kontrol Musik"> <!-- Start in paused state visually -->
+    <div id="floating-music-player" class="paused" aria-label="Kontrol Musik">
         <button id="floating-play-pause" aria-label="Putar Musik" disabled>
-             <!-- SVG Icons for Play/Pause/Error -->
              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
              <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
              <svg class="icon-error" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
@@ -511,7 +516,7 @@
         Browser Anda tidak mendukung elemen audio.
     </audio>
 
-    <!-- JavaScript (Mostly the same logic, but adapted for new CSS classes/icons) -->
+    <!-- JavaScript (Includes fixes for player icon state) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             console.log("DOM Loaded. Initializing scripts.");
@@ -524,12 +529,10 @@
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
                                 entry.target.classList.add('is-visible');
-                                // observer.unobserve(entry.target); // Optional: Uncomment for once-only animation
+                                // observer.unobserve(entry.target);
                             }
-                            // Optional: Add else clause to remove 'is-visible' if element scrolls out of view
-                            // else { entry.target.classList.remove('is-visible'); }
                         });
-                    }, { threshold: 0.1 }); // Adjust threshold as needed (0.1 means 10% visible)
+                    }, { threshold: 0.1 });
                     animatedElements.forEach(el => observer.observe(el));
                     console.log(`IntersectionObserver initialized. Observing ${animatedElements.length} elements.`);
                 } else {
@@ -537,145 +540,156 @@
                 }
             } else {
                  console.warn("IntersectionObserver not supported or JS disabled early. Scroll animations inactive.");
-                 // Fallback: Make elements visible immediately if no JS/Observer
-                 document.querySelectorAll('.animate-on-scroll').forEach(el => el.style.opacity = 1);
+                 document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                     el.style.opacity = 1;
+                     el.style.transform = 'translateY(0)';
+                 });
             }
 
             // --- HTML5 Audio Player Logic ---
             const audioPlayer = document.getElementById('background-music');
             const floatingPlayerElement = document.getElementById('floating-music-player');
             const floatingPlayPauseButton = document.getElementById('floating-play-pause');
-            // Removed isAudioPlaying state variable, relying on player.paused and CSS classes
 
             if (audioPlayer && floatingPlayerElement && floatingPlayPauseButton) {
                 console.log("Audio player elements found.");
 
-                const updatePlayerState = () => {
-                    if (audioPlayer.paused || audioPlayer.ended) {
-                        floatingPlayerElement.classList.remove('playing');
+                const updatePlayerState = (isError = false) => {
+                    floatingPlayerElement.classList.remove('playing', 'paused', 'error');
+                    if (isError) {
+                        floatingPlayerElement.classList.add('error');
+                        floatingPlayPauseButton.setAttribute('aria-label', 'Musik Error');
+                        floatingPlayPauseButton.disabled = true;
+                        console.log("Player state updated to: ERROR");
+                    } else if (audioPlayer.paused || audioPlayer.ended) {
                         floatingPlayerElement.classList.add('paused');
                         floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
+                        console.log("Player state updated to: Paused");
                     } else {
-                        floatingPlayerElement.classList.remove('paused');
-                         floatingPlayerElement.classList.add('playing');
+                        floatingPlayerElement.classList.add('playing');
                         floatingPlayPauseButton.setAttribute('aria-label', 'Jeda Musik');
+                        console.log("Player state updated to: Playing");
                     }
-                     floatingPlayerElement.classList.remove('error'); // Clear error state on interaction attempt
+                    if (!isError) {
+                         // Only enable if audio is ready or potentially ready
+                         // Checking readyState >= 1 (HAVE_METADATA) is a reasonable check
+                         floatingPlayPauseButton.disabled = !(audioPlayer.readyState >= 1);
+                         // If state is paused/playing but button got disabled, re-enable
+                         if (!floatingPlayPauseButton.disabled && (floatingPlayerElement.classList.contains('paused') || floatingPlayerElement.classList.contains('playing'))) {
+                              // It seems ready, ensure enabled
+                         } else if (audioPlayer.readyState < 1) {
+                             floatingPlayPauseButton.disabled = true; // Ensure disabled if not ready
+                         }
+                    }
                 };
 
-                // Enable button when audio can potentially play
                 audioPlayer.addEventListener('canplay', () => {
                      console.log("Audio can play. Enabling button.");
-                     floatingPlayPauseButton.disabled = false;
-                     updatePlayerState(); // Set initial visual state based on default
-                 }, { once: true }); // Only need this once
+                     updatePlayerState(); // Update state and enable button
+                 }, { once: true });
 
-                 // Fallback enabling button (optional, 'canplay' is usually reliable)
-                 setTimeout(() => {
-                     if (floatingPlayPauseButton.disabled) {
+                 const enableButtonFallback = setTimeout(() => {
+                     if (floatingPlayPauseButton.disabled && !floatingPlayerElement.classList.contains('error')) {
                         console.log("Timeout: Enabling button as fallback.");
+                         if (!floatingPlayerElement.classList.contains('playing') && !floatingPlayerElement.classList.contains('paused')) {
+                            floatingPlayerElement.classList.add('paused'); // Default visual state
+                            floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik');
+                         }
                          floatingPlayPauseButton.disabled = false;
-                         updatePlayerState();
                      }
-                 }, 2000);
+                 }, 3000); // Increased timeout slightly
 
-                // --- Button Click to Play/Pause ---
                 floatingPlayPauseButton.addEventListener('click', (e) => {
                     e.stopPropagation();
+                    floatingPlayerElement.classList.remove('error'); // Attempt to clear error on click
 
                     if (audioPlayer.paused || audioPlayer.ended) {
                         const playPromise = audioPlayer.play();
                         if (playPromise !== undefined) {
-                            playPromise.then(() => {
-                                console.log("Audio Playing via button");
-                                updatePlayerState(); // Update UI based on successful play
-                            }).catch(error => {
-                                console.error("Audio Playback Error:", error);
-                                floatingPlayerElement.classList.add('error');
-                                floatingPlayerElement.classList.remove('playing', 'paused');
-                                floatingPlayPauseButton.setAttribute('aria-label', 'Putar Musik Gagal');
-                                // Optionally disable button on persistent error: floatingPlayPauseButton.disabled = true;
+                            playPromise.then(() => { console.log("Audio Play initiated"); })
+                            .catch(error => {
+                                console.error("Audio Playback Error on click:", error);
+                                updatePlayerState(true);
                             });
-                        } else { // Fallback for older browsers
+                        } else {
                             try {
                                 audioPlayer.play();
-                                console.log("Audio Playing via button (no promise)");
-                                updatePlayerState();
+                                console.log("Audio Play initiated (no promise)");
                             } catch (error) {
-                                console.error("Audio Playback Error (no promise):", error);
-                                floatingPlayerElement.classList.add('error');
-                                floatingPlayerElement.classList.remove('playing', 'paused');
+                                console.error("Audio Playback Error on click (no promise):", error);
+                                updatePlayerState(true);
                             }
                         }
                     } else {
                         audioPlayer.pause();
-                        console.log("Audio Paused via button");
-                        updatePlayerState(); // Update UI based on pause
+                        console.log("Audio Pause initiated");
                     }
                 });
 
-                // --- Update UI based on Audio Events ---
-                audioPlayer.addEventListener('play', () => { // Fired AFTER play starts
-                    console.log("Audio Event: play");
+                const handleAudioEvent = (eventName) => {
+                    console.log(`Audio Event: ${eventName}`);
+                    clearTimeout(enableButtonFallback);
                     updatePlayerState();
-                });
-                 audioPlayer.addEventListener('playing', () => { // Fired during play (might fire multiple times)
-                    console.log("Audio Event: playing");
-                    updatePlayerState(); // Redundant but safe
-                });
-                audioPlayer.addEventListener('pause', () => {
-                    console.log("Audio Event: pause");
-                    updatePlayerState();
-                });
-                audioPlayer.addEventListener('ended', () => {
-                    console.log("Audio Event: ended (Looping should restart it)");
-                    updatePlayerState(); // Ensure state is correct if loop fails
-                });
+                };
+
+                audioPlayer.addEventListener('loadstart', () => { floatingPlayPauseButton.disabled = true; console.log("Audio Event: loadstart"); }); // Disable on load start
+                audioPlayer.addEventListener('loadedmetadata', () => { console.log("Audio Event: loadedmetadata"); updatePlayerState(); }); // Update state, might enable button
+                audioPlayer.addEventListener('play', () => handleAudioEvent('play'));
+                audioPlayer.addEventListener('playing', () => handleAudioEvent('playing'));
+                audioPlayer.addEventListener('pause', () => handleAudioEvent('pause'));
+                audioPlayer.addEventListener('ended', () => handleAudioEvent('ended'));
+
                 audioPlayer.addEventListener('error', (e) => {
                     console.error("HTML5 Audio Error Event:", audioPlayer.error);
-                    floatingPlayerElement.classList.add('error');
-                    floatingPlayerElement.classList.remove('playing', 'paused');
-                    floatingPlayPauseButton.setAttribute('aria-label', 'Musik Error');
-                    floatingPlayPauseButton.disabled = true; // Disable button on error
+                    clearTimeout(enableButtonFallback);
+                    updatePlayerState(true);
                 });
+
+                // Initial sync in case state loaded quickly
+                 if (audioPlayer.readyState >= 1 && !floatingPlayerElement.classList.contains('error')) {
+                     updatePlayerState();
+                 } else {
+                     // Ensure it's visually paused and disabled if not ready
+                     floatingPlayerElement.classList.remove('playing','error');
+                     floatingPlayerElement.classList.add('paused');
+                     floatingPlayPauseButton.disabled = true;
+                 }
+
 
             } else {
                 console.error("Required audio player elements not found! Check IDs.");
-                if (floatingPlayPauseButton) floatingPlayPauseButton.style.display = 'none'; // Hide button if elements missing
+                if (floatingPlayPauseButton) floatingPlayPauseButton.style.display = 'none';
                 if (floatingPlayerElement) floatingPlayerElement.style.display = 'none';
             }
 
-            // --- Draggable Music Player Logic (No changes needed here) ---
+
+            // --- Draggable Music Player Logic ---
              if (floatingPlayerElement) {
                 let isDragging = false;
-                let startX, startY, initialX, initialY;
+                let startX, startY, initialX = 0, initialY = 0; // Initialize position
 
-                const getTranslateValues = (element) => {
-                    const style = window.getComputedStyle(element);
-                    const matrix = style.transform || style.webkitTransform || style.mozTransform;
-                    if (matrix === 'none' || typeof matrix === 'undefined') return { x: 0, y: 0 };
-                    const matrixType = matrix.includes('3d') ? '3d' : '2d';
-                    const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ');
-                    if (matrixType === '2d') return { x: parseFloat(matrixValues[4]), y: parseFloat(matrixValues[5]) };
-                    if (matrixType === '3d') return { x: parseFloat(matrixValues[12]), y: parseFloat(matrixValues[13]) };
-                };
+                 // Get initial position from CSS (might be 0,0 if not previously moved)
+                 const style = window.getComputedStyle(floatingPlayerElement);
+                 const matrix = new DOMMatrixReadOnly(style.transform);
+                 initialX = matrix.m41;
+                 initialY = matrix.m42;
+                 console.log("Initial Player Position Read:", initialX, initialY);
 
 
                 function dragStart(e) {
-                     // Prevent drag starting on the button itself, especially if disabled
                     if (e.target === floatingPlayPauseButton || (floatingPlayPauseButton && floatingPlayPauseButton.contains(e.target)) || (floatingPlayPauseButton && floatingPlayPauseButton.disabled)) {
-                         console.log("Drag prevented on button.");
                          return;
                     }
 
                     isDragging = true;
                     floatingPlayerElement.classList.add('dragging');
-                    floatingPlayerElement.style.transition = 'none'; // Disable transition during drag
+                    floatingPlayerElement.style.transition = 'none';
 
-                    const currentPos = getTranslateValues(floatingPlayerElement);
-                    initialX = currentPos.x;
-                    initialY = currentPos.y;
-
+                    // Read CURRENT transform just before drag starts
+                    const currentStyle = window.getComputedStyle(floatingPlayerElement);
+                    const currentMatrix = new DOMMatrixReadOnly(currentStyle.transform);
+                    initialX = currentMatrix.m41; // Re-sync initial pos for this drag
+                    initialY = currentMatrix.m42;
 
                     if (e.type === 'mousedown') {
                         startX = e.clientX; startY = e.clientY;
@@ -684,23 +698,20 @@
                     } else if (e.type === 'touchstart' && e.touches.length === 1) {
                          const touch = e.touches[0];
                          startX = touch.clientX; startY = touch.clientY;
-                         // Use passive: false ONLY for the move listener where preventDefault might be needed
                          document.addEventListener('touchmove', dragMove, { passive: false });
                          document.addEventListener('touchend', dragEnd);
                          document.addEventListener('touchcancel', dragEnd);
                     } else {
-                         isDragging = false; // Ensure dragging stops if multi-touch occurs
+                         isDragging = false;
                          floatingPlayerElement.classList.remove('dragging');
                          return;
                     }
-                    console.log("Drag Start - Initial CSS Pos:", initialX, initialY);
+                     console.log("Drag Start - Initial:", initialX, initialY);
                 }
 
                 function dragMove(e) {
                     if (!isDragging) return;
-                     // Prevent page scroll ONLY when dragging the element
                      if (e.cancelable) e.preventDefault();
-
 
                     let currentX, currentY;
                     if (e.type === 'mousemove') {
@@ -708,33 +719,22 @@
                     } else if (e.type === 'touchmove' && e.touches.length > 0) {
                         const touch = e.touches[0];
                         currentX = touch.clientX; currentY = touch.clientY;
-                    } else { return; } // Should not happen if listeners are correct
+                    } else { return; }
 
                     const dx = currentX - startX;
                     const dy = currentY - startY;
                     let newX = initialX + dx;
                     let newY = initialY + dy;
 
-                    // Constrain movement within viewport boundaries
-                    const parentRect = document.body.getBoundingClientRect(); // Use body or a specific container
-                    const elemRect = floatingPlayerElement.getBoundingClientRect();
-                    const elemWidth = floatingPlayerElement.offsetWidth; // Use offsetWidth for reliable size
+                    // Constrain based on viewport dimensions and element size
+                    const elemWidth = floatingPlayerElement.offsetWidth;
                     const elemHeight = floatingPlayerElement.offsetHeight;
+                    const maxX = window.innerWidth - elemWidth;
+                    const maxY = window.innerHeight - elemHeight;
 
-                     // Calculate boundaries based on current transform and viewport dimensions
-                     const minX = -initialX; // How far left can it go (relative to its initial CSS transform)
-                     const maxX = window.innerWidth - elemWidth - initialX; // How far right
-                     const minY = -initialY; // How far up
-                     const maxY = window.innerHeight - elemHeight - initialY; // How far down
-
-                    // Calculate the final DELTA (dx, dy) clamped within bounds
-                     const clampedDx = Math.max(minX, Math.min(dx, maxX));
-                     const clampedDy = Math.max(minY, Math.min(dy, maxY));
-
-
-                     // Apply the clamped DELTA to the initial position
-                     newX = initialX + clampedDx;
-                     newY = initialY + clampedDy;
+                    // Ensure transform values don't push element off-screen
+                    newX = Math.max(0, Math.min(newX, maxX));
+                    newY = Math.max(0, Math.min(newY, maxY));
 
 
                     floatingPlayerElement.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
@@ -744,29 +744,28 @@
                     if (!isDragging) return;
                     isDragging = false;
                     floatingPlayerElement.classList.remove('dragging');
-                    floatingPlayerElement.style.transition = ''; // Re-enable transitions
+                    floatingPlayerElement.style.transition = ''; // Re-enable transitions AFTER releasing
 
-                    // Update initialX/Y to the final position for the next drag start
-                    const finalPos = getTranslateValues(floatingPlayerElement);
-                    initialX = finalPos.x;
-                    initialY = finalPos.y;
+                     // Read final transform to update initialX/Y for next potential drag
+                    const finalStyle = window.getComputedStyle(floatingPlayerElement);
+                    const finalMatrix = new DOMMatrixReadOnly(finalStyle.transform);
+                    initialX = finalMatrix.m41;
+                    initialY = finalMatrix.m42;
+                    console.log("Drag End - Final:", initialX, initialY);
 
 
-                    if (e.type === 'mouseup' || e.type === 'mousemove') { // mousemove might be dangling if mouseup outside window
+                    if (e.type === 'mouseup' || e.type === 'mousemove') {
                         document.removeEventListener('mousemove', dragMove);
                         document.removeEventListener('mouseup', dragEnd);
-                    } else { // touchend or touchcancel
+                    } else {
                         document.removeEventListener('touchmove', dragMove);
                         document.removeEventListener('touchend', dragEnd);
                         document.removeEventListener('touchcancel', dragEnd);
                     }
-                    console.log("Drag End - Final CSS Pos:", initialX, initialY);
                 }
 
-                // Use passive: true for start listeners as we don't preventDefault there
                 floatingPlayerElement.addEventListener('mousedown', dragStart);
                 floatingPlayerElement.addEventListener('touchstart', dragStart, { passive: true });
-
 
             } else {
                  console.error("Draggable player element (#floating-music-player) not found!");
@@ -776,4 +775,4 @@
     </script>
 
 </body>
-</html>
+</html> 
